@@ -77,5 +77,14 @@ namespace CRConsultMvc.Controllers
         {
             return View();
         }
+        public ActionResult LavoriWeb()
+        {
+            return View();
+        }
+        public ActionResult Test()
+        {
+            return View();
+        }
+
     }
 }

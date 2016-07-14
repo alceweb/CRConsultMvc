@@ -29,33 +29,53 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <a class="navbar-brand" href="/Home/Index">
-            <img class="imgLogo" alt="Logo" src="~/Content/Images/LogoAC.png" />
-            <span class="textLogo">Information Technology - Web Developer</span>
+    <div class="container">
+        <div class="row">
+            <a class="navbar-brand" href="/Home/Index">
+                <img class="imgLogo" alt="Logo" src="~/Content/Images/LogoAC.png" />
+                <span class="textLogo">Information Technology - Web Developer</span>
 
-        </a>
-    </div><hr/>
-    <div class="container body-content">
+            </a>
+        </div><hr />
         @RenderBody()
-        
-    </div><hr />
-    <footer>
-        <p>&copy; @DateTime.Now.Year -<strong> C.R.Consult di Rocchetti Cesare</strong></p>
-        <p>
-            Via degli Orti 11/d<br />
-            24043 Caravaggio (BG)<br />
-            Tel. 036353187
-        </p>
-        <p>Partita Iva: 02669910164</p>
-        <h4>Contatti</h4>
-        <p>
-            Info commerciali: <a href="mailto:cesare@cr-consult.eu">cesare@cr-consult.eu</a><br />
-            Assistenza tecnica: <a href="mailto:webservice@cr-consult.it">webservice@cr-consult.it</a><br />
-            Contabilità: <a href="mailto:contab@pec.cr-consult.it">contab@pec.cr-consult.it</a><br />
-            Contabilità: <a href="mailto:almaallevi@gmail.com">alma.allevi@gmail.com</a>
-        </p>
 
+    </div>
+    <footer>
+        <div class="container">
+            <div class="row">
+
+                <div class="col col-md-4">
+                    <h4><strong><em> C.R.Consult di Rocchetti Cesare</em></strong></h4>
+                    <p>
+                        Via degli Orti 11/d<br />
+                        24043 Caravaggio (BG)<br />
+                        Tel. 036353187<br/>
+                        Partita Iva: 02669910164</p>
+
+                </div>
+                <div class="col col-md-4">
+                    <h4><strong><em>Contatti</em></strong></h4>
+                    <p>
+                        Info commerciali: <a href="mailto:cesare@cr-consult.eu">cesare@cr-consult.eu</a><br />
+                        Assistenza tecnica: <a href="mailto:webservice@cr-consult.it">webservice@cr-consult.it</a><br />
+                        Sviluppo Web: <a href="mailto:almaallevi@gmail.com">alma.allevi@gmail.com</a><br/>
+                        Contabilità: <a href="mailto:contab@pec.cr-consult.it">contab@pec.cr-consult.it</a><br />
+                    </p>
+
+                </div>
+                <div class="col col-md-4">
+                    <h4><strong><em>&copy; @DateTime.Now.Year - References</em></strong></h4>
+                    <p>
+                        Documento privacy: <a href="~/Views/Home/Privacy.cshtml">Leggi</a><br/>
+                        Exchange: <a href="https://crconsultcaravaggio-public.sharepoint.com/">SharePoint</a><br />
+                        Cloud: <a href="https://portal.azure.com/">Microsoft Azure</a><br />
+                        PEC: <a href="mailto:contab@pec.cr-consult.it">contab@pec.cr-consult.it</a>
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
     </footer>
 
     @Scripts.Render("~/bundles/jquery")

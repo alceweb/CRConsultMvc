@@ -183,24 +183,46 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\Assistenza1-500.jpg" />
+    <Content Include="Content\Images\Assistenza2-500.jpg" />
     <Content Include="Content\Images\Assistenza200x200.jpg" />
+    <Content Include="Content\Images\Assistenza3-500.jpg" />
     <Content Include="Content\Images\Assistenza500.jpg" />
     <Content Include="Content\Images\Assistenza500x500.jpg" />
     <Content Include="Content\Images\Assistenza50x50.jpg" />
+    <Content Include="Content\Images\Loghi\Asmecc.jpg" />
     <Content Include="Content\Images\Loghi\Bardellino.jpg" />
+    <Content Include="Content\Images\Loghi\camen.png" />
     <Content Include="Content\Images\Loghi\Civis.png" />
+    <Content Include="Content\Images\Loghi\Contel.JPG" />
+    <Content Include="Content\Images\Loghi\defendi.jpg" />
     <Content Include="Content\Images\Loghi\Desidera.jpg" />
     <Content Include="Content\Images\Loghi\Ferri.png" />
+    <Content Include="Content\Images\Loghi\ferrinardi.jpg" />
+    <Content Include="Content\Images\Loghi\Fikta.JPG" />
     <Content Include="Content\Images\Loghi\FiorDiLoto.jpg" />
     <Content Include="Content\Images\Loghi\Gamba.png" />
+    <Content Include="Content\Images\Loghi\ISI.JPG" />
     <Content Include="Content\Images\Loghi\LaFonte.jpg" />
+    <Content Include="Content\Images\Loghi\LetiziaVerga.jpg" />
+    <Content Include="Content\Images\Loghi\logo_s.JPG" />
+    <Content Include="Content\Images\Loghi\Loneld.jpg" />
+    <Content Include="Content\Images\Loghi\matsuyama.jpg" />
+    <Content Include="Content\Images\Loghi\MRG.jpg" />
+    <Content Include="Content\Images\Loghi\NCProgram.jpg" />
     <Content Include="Content\Images\Loghi\NFP.png" />
     <Content Include="Content\Images\Loghi\PMI.png" />
     <Content Include="Content\Images\Loghi\PuntoFitness.jpg" />
     <Content Include="Content\Images\Loghi\Santuario.jpg" />
+    <Content Include="Content\Images\Loghi\Serenita1.JPG" />
+    <Content Include="Content\Images\Loghi\Shotoken.JPG" />
     <Content Include="Content\Images\Loghi\shotokenshukaiCaravaggio.jpg" />
     <Content Include="Content\Images\Loghi\Verri.jpg" />
+    <Content Include="Content\Images\Loghi\Zio.jpg" />
     <Content Include="Content\Images\LogoAC.png" />
+    <Content Include="Content\Images\Networking1-500.jpg" />
+    <Content Include="Content\Images\Networking2-500.jpg" />
+    <Content Include="Content\Images\Networking3-500.jpg" />
     <Content Include="Content\Images\Server200x200.jpg" />
     <Content Include="Content\Images\Server500.jpg" />
     <Content Include="Content\Images\Server500x500.jpg" />
@@ -212,7 +234,11 @@
     <Content Include="Content\Images\WebApp1-200x200.jpg" />
     <Content Include="Content\Images\WebApp1-500.jpg" />
     <Content Include="Content\Images\WebApp1-500x500.jpg" />
+    <Content Include="Content\Images\WebApp2-500.jpg" />
+    <Content Include="Content\Images\WebApp2-500x500.jpg" />
     <Content Include="Content\Images\WebApp200x200.jpg" />
+    <Content Include="Content\Images\WebApp3-500.jpg" />
+    <Content Include="Content\Images\WebApp3-500x500.jpg" />
     <Content Include="Content\Images\WebApp500.jpg" />
     <Content Include="Content\Images\WebApp500x500.jpg" />
     <Content Include="Content\Images\WebApp50x50.jpg" />
@@ -224,7 +250,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Properties\PublishProfiles\crconsult.pubxml" />
+    <None Include="Properties\PublishProfiles\ArubaBusiness.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -276,6 +302,8 @@
     <Content Include="Views\Home\Assistenza.cshtml" />
     <Content Include="Views\Home\Privacy.cshtml" />
     <Content Include="Views\Home\MailInviata.cshtml" />
+    <Content Include="Views\Home\LavoriWeb.cshtml" />
+    <Content Include="Views\Home\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
