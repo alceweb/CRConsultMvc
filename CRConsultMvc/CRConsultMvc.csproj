@@ -205,6 +205,7 @@
     <Content Include="Content\Images\Loghi\ISI.JPG" />
     <Content Include="Content\Images\Loghi\LaFonte.jpg" />
     <Content Include="Content\Images\Loghi\LetiziaVerga.jpg" />
+    <Content Include="Content\Images\Loghi\OfficinaCavalli.jpg" />
     <Content Include="Content\Images\Loghi\logo_s.JPG" />
     <Content Include="Content\Images\Loghi\Loneld.jpg" />
     <Content Include="Content\Images\Loghi\matsuyama.jpg" />
@@ -231,6 +232,7 @@
     <Content Include="Content\Images\NetWork500x500.jpg" />
     <Content Include="Content\Images\NetWork50x50.jpg" />
     <Content Include="Content\Images\ok.png" />
+    <Content Include="Content\Images\WebApp.jpg" />
     <Content Include="Content\Images\WebApp1-200x200.jpg" />
     <Content Include="Content\Images\WebApp1-500.jpg" />
     <Content Include="Content\Images\WebApp1-500x500.jpg" />
