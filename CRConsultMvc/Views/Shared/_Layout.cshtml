@@ -21,20 +21,44 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-        <li>@Html.ActionLink("Networking", "Networking", "Home")</li>
-        <li>@Html.ActionLink("Webb App", "WebPage", "Home")</li>
-        <li>@Html.ActionLink("Assistenza", "Assistenza", "Home")</li>
-    </ul>
-    @Html.Partial("_LoginPartial")
+                    <li>@Html.ActionLink("Networking", "Networking", "Home")</li>
+                    <li>@Html.ActionLink("Webb App", "WebPage", "Home")</li>
+                    <li>@Html.ActionLink("Assistenza", "Assistenza", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
+
+    @*Menu destra fisso*@
+    <div class="docu">
+        <ul >
+            <li>
+                <a href="@Url.Action("Stat", "Home")" title="Statistiche accesso">
+                    <img src="~/Content/Images/Grafico.png" />
+                </a>
+
+            </li>
+            <li>
+                <a href="http://portal.office.com" target="_blank" title="Office 365">
+                    <img src="~/Content/Images/Office365.png" />
+                </a>
+
+            </li>
+            <li>
+                <a href="https://portal.azure.com/" target="_blank" title="Microsoft Azure">
+                    <img src="~/Content/Images/azure.png" />
+                </a>
+
+            </li>
+       </ul>
+   </div>
+
     <div class="container">
         <div class="row">
             <a class="navbar-brand" href="/Home/Index">
                 <img class="imgLogo" alt="Logo" src="~/Content/Images/LogoAC.png" />
                 <span class="textLogo">Information Technology - Web Developer</span>
-
             </a>
         </div><hr />
         @RenderBody()

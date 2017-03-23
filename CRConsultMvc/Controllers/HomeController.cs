@@ -28,7 +28,7 @@ namespace CRConsultMvc.Controllers
                 var message = new MailMessage();
                 message.To.Add(new MailAddress("cesare@cr-consult.eu"));
                 message.From = new MailAddress("webservice@cr-consult.it");
-                message.Subject = "Richiesta info inviata dal sito CRConsult.eu";
+                message.Subject = "Richiesta info " + model.settore + " inviata dal sito CRConsult.eu";
                 message.Body = string.Format(body, model.Nome, model.Email, model.Ditta, model.Telefono, model.Messaggio);
                 message.IsBodyHtml = true;
 
@@ -40,6 +40,7 @@ namespace CRConsultMvc.Controllers
             }
             return View(model);
         }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -82,6 +83,11 @@ namespace CRConsultMvc.Controllers
             return View();
         }
         public ActionResult Test()
+        {
+            return View();
+        }
+
+        public ActionResult Stat()
         {
             return View();
         }

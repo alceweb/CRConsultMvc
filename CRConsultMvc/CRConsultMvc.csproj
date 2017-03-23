@@ -190,6 +190,8 @@
     <Content Include="Content\Images\Assistenza500.jpg" />
     <Content Include="Content\Images\Assistenza500x500.jpg" />
     <Content Include="Content\Images\Assistenza50x50.jpg" />
+    <Content Include="Content\Images\azure.png" />
+    <Content Include="Content\Images\Grafico.png" />
     <Content Include="Content\Images\Loghi\Asmecc.jpg" />
     <Content Include="Content\Images\Loghi\Bardellino.jpg" />
     <Content Include="Content\Images\Loghi\camen.png" />
@@ -205,6 +207,7 @@
     <Content Include="Content\Images\Loghi\ISI.JPG" />
     <Content Include="Content\Images\Loghi\LaFonte.jpg" />
     <Content Include="Content\Images\Loghi\LetiziaVerga.jpg" />
+    <Content Include="Content\Images\Loghi\Padella.png" />
     <Content Include="Content\Images\Loghi\OfficinaCavalli.jpg" />
     <Content Include="Content\Images\Loghi\logo_s.JPG" />
     <Content Include="Content\Images\Loghi\Loneld.jpg" />
@@ -218,12 +221,14 @@
     <Content Include="Content\Images\Loghi\Serenita1.JPG" />
     <Content Include="Content\Images\Loghi\Shotoken.JPG" />
     <Content Include="Content\Images\Loghi\shotokenshukaiCaravaggio.jpg" />
+    <Content Include="Content\Images\Loghi\Simerio.jpg" />
     <Content Include="Content\Images\Loghi\Verri.jpg" />
     <Content Include="Content\Images\Loghi\Zio.jpg" />
     <Content Include="Content\Images\LogoAC.png" />
     <Content Include="Content\Images\Networking1-500.jpg" />
     <Content Include="Content\Images\Networking2-500.jpg" />
     <Content Include="Content\Images\Networking3-500.jpg" />
+    <Content Include="Content\Images\Office365.png" />
     <Content Include="Content\Images\Server200x200.jpg" />
     <Content Include="Content\Images\Server500.jpg" />
     <Content Include="Content\Images\Server500x500.jpg" />
@@ -265,13 +270,6 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -306,6 +304,16 @@
     <Content Include="Views\Home\MailInviata.cshtml" />
     <Content Include="Views\Home\LavoriWeb.cshtml" />
     <Content Include="Views\Home\Test.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Home\Stat.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

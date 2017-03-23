@@ -8,6 +8,7 @@ namespace CRConsultMvc.Models
 {
     public class EmailFormModel
     {
+        public string settore {get;set;}
         [Required, Display(Name = "Nome")]
         public string Nome { get; set; }
         public string Ditta { get; set; }
