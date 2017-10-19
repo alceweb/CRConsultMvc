@@ -183,6 +183,9 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Images\anydesk.png" />
     <Content Include="Content\Images\Assistenza1-500.jpg" />
     <Content Include="Content\Images\Assistenza2-500.jpg" />
     <Content Include="Content\Images\Assistenza200x200.jpg" />
@@ -196,6 +199,7 @@
     <Content Include="Content\Images\Loghi\Bardellino.jpg" />
     <Content Include="Content\Images\Loghi\camen.png" />
     <Content Include="Content\Images\Loghi\Civis.png" />
+    <Content Include="Content\Images\Loghi\ConcordesSmall.png" />
     <Content Include="Content\Images\Loghi\Contel.JPG" />
     <Content Include="Content\Images\Loghi\defendi.jpg" />
     <Content Include="Content\Images\Loghi\Desidera.jpg" />
@@ -207,6 +211,7 @@
     <Content Include="Content\Images\Loghi\ISI.JPG" />
     <Content Include="Content\Images\Loghi\LaFonte.jpg" />
     <Content Include="Content\Images\Loghi\LetiziaVerga.jpg" />
+    <Content Include="Content\Images\Loghi\NcProgram.png" />
     <Content Include="Content\Images\Loghi\Padella.png" />
     <Content Include="Content\Images\Loghi\OfficinaCavalli.jpg" />
     <Content Include="Content\Images\Loghi\logo_s.JPG" />
@@ -252,11 +257,17 @@
     <Content Include="Content\overlay-bootstrap.css" />
     <Content Include="Content\overlay-bootstrap.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Properties\PublishProfiles\ArubaBusiness.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
