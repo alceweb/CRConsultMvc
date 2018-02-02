@@ -1,0 +1,50 @@
+﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+
+@{
+    ViewBag.Title = "Dettaglio ruolo";
+}
+
+<h2>@ViewBag.Title @Model.Name</h2>
+<h3>@ViewBag.UserCount utenti attivi </h3>
+@if (ViewBag.UserCount == 0)
+{
+    <p>Nessun utente assegnato a questo ruolo.</p>
+    <span>
+        @Html.ActionLink("Cancella ruolo", "Delete", "RolesAdmin", new { id = ViewBag.Id }, new { @class = "btn btn-danger" })
+    </span>
+    <hr />
+}
+
+<table class="table table-hover">
+
+    @foreach (var item in ViewBag.Users)
+    {
+        <tr>
+            <td>
+                <a href="@Url.Action("Edit", "UsersAdmin", new {id = item.Id})" class="h3"><span class="glyphicon glyphicon-pencil text-success"></span></a>
+            </td>
+            @if (File.Exists(@Server.MapPath("~/Content/Images/FotoIscritti/" + @item.Id + ".jpg")))
+                {
+                <td>
+                    <img class="img-usr" src="@Url.Content("~/Content/Images/FotoIscritti/" + @item.Id + ".jpg")" />
+
+                </td>
+            }
+            else
+            {
+                <td>
+                    <img class="img-usr" src="@Url.Content("~/Content/Images/FotoIscritti/anonimous.jpg")" />
+                </td>
+            }
+            <td>
+                <span> @item.Nome @item.Cognome  </span>
+            </td>
+            <td>
+                <span class="badge"><span class="fa fa-envelope-o"></span>  @item.Email</span>
+            </td>
+        </tr>
+    }
+</table>
+<hr />
+<div>@Html.ActionLink("Torna ai ruoli", "Index", "RolesAdmin", null, new { @class = "btn btn-primary" })</div>
+

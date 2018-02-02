@@ -1,0 +1,23 @@
+﻿@model IEnumerable<CRConsultMvc.Models.RoleViewModel>
+
+@{
+    ViewBag.Title = "Gestione ruoli";
+}
+
+<h2>@ViewBag.Title</h2>
+<p>
+    <a href="@Url.Action("Create", "RolesAdmin")" class="btn btn-primary"><span class="badge">@ViewBag.RolesCount</span> Nuovo</a>
+</p>
+<table class="table table-hover">
+    @foreach (var item in ViewBag.Roles)
+    {
+        <tr>
+            <td>
+                <a href="@Url.Action("Details", "RolesAdmin", new { id = item.Id, usr = item.Name })"><strong><em>@item.Name </em></strong></a>
+            </td>
+        </tr>
+    }
+
+
+</table>
+

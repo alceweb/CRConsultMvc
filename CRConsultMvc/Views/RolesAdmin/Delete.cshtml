@@ -1,0 +1,31 @@
+﻿
+@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Cancella ruolo</h2>
+<h3>Sei sicuro di voler cancellare il ruolo? </h3>
+<p>Cancellando questo ruolo, verranno rimossi tutti gli utenti dal ruolo. Non verranno cancellati gli utenti.</p>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Cancella" class="btn btn-danger" />
+            @Html.ActionLink("Annulla", "Index", null, new { @class = "btn btn-primary" })
+        </div>
+    }
+</div>

@@ -1,85 +1,177 @@
-﻿
+﻿@model CRConsultMvc.Models.EmailEsperto
 @{
     ViewBag.Title = "Assistenza";
 }
 
-<h1 class="text-center">Assistenza<br />
-<a href="/Account/Login"><span class="glyphicon glyphicon-user"></span>entra</a>
-    </h1><h4 class="text-center">Se sei già nostro cliente entra nell'area riservata per usufruire dei servizi dedicati</h4>
-<hr />
-<div class="row">
-    <div class="col col-md-4">
-        <h2 class="text-center">Aziende</h2>
-        <div class="thumbnail">
-            <img class="imgHome img-circle" src="~/Content/Images/Assistenza1-500.jpg" />
-        </div>
-        <div class="div1">
-            <h3><a href="/Account/Login"><span class="fa fa-eercast"> A contratto</span></a></h3>
-            <ul>
-                <li>Annuale</li>
-                <li>No diritto di chiamata</li>
-                <li>Monte ore personalizzati</li>
-                <li>Tempi di intervento server</li>
-            </ul>
-            <h3><a href="/Account/Login"><span class="fa fa-phone-square"> A chiamata</span></a></h3>
-            <ul>
-                <li>On Site</li>
-                <li>Presso laboratorio</li>
-            </ul>
-            <h3><a href="/Account/Login"><span class="fa fa-calendar-check-o"> Programmata</span></a></h3>
-            <ul>
-                <li>Fault prevention</li>
-                <li>Backup strutturati</li>
-                <li>Cleaning</li>
-                <li>Manutenzione ordinaria</li>
-            </ul>
-            <h3><a href="/Account/Login"><span class="fa fa-object-group"> Global</span></a></h3>
-            <ul>
-                <li>Data Recovery</li>
-                <li>Analisi installato</li>
-                <li>Progettazione</li>
-                <li>Consulenza globale</li>
-            </ul>
+<h1 class="text-center">Assistenza<br/>
+   </h1>
+
+<div class="row div-assistenza">
+    <div class="col-md-6">
+
+    </div>
+    <div class="col-md-6 text-center">
+        <h1 >Problemi con l'informatica?</h1>
+        <a role="button" data-toggle="modal" href="#modalass" aria-expanded="false" aria-controls="modalass">
+            <span class="fa fa-street-view fa-3x"> Contatta un esperto</span>
+        </a>
+        <hr class="hrl" />
+        <h1 >Sei già nostro cliente?</h1>
+        <a href="@Url.Action("IndexUt", "Interventis")"><span class="fa fa-user fa-3x"> Entra nell'area riservata</span></a>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Contatta un esperto</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            Compilando questa form verrai messo in contatto con un esperto.<br/>
+                            Lascia i tuoi dati (mail, cellulare) e verrai richiamato da un nostro incaricato.<br/>
+                            La richiesta di contatto non comporta nessun impegno economico. I dati inseriti verranno trattati secondo la <a target="_blank" href="@Url.Action("Privacy", "Home")">Privacy Policy</a>
+                        </div>
+                        @using (Html.BeginForm("FormEsperto", "Home", null, FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                            @Html.AntiForgeryToken()
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        @Html.TextBoxFor(m => m.Nome, new { @class = "form-control center-block", placeholder = "Nome Cognome", required = "required" })
+                                        @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        @Html.TextBoxFor(m => m.Ditta, new { @class = "form-control center-block", placeholder = "Intestazion ditta (facoltativo)" })
+                                        @Html.ValidationMessageFor(m => m.Ditta, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        @Html.TextBoxFor(m => m.Telefono, new { @class = "form-control center-block", placeholder = "Telefono / cellulare", required = "required" })
+                                        @Html.ValidationMessageFor(m => m.Telefono, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control center-block", placeholder = "La tua mail", required = "required" })
+                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        @Html.TextAreaFor(m => m.Richiesta, new { @class = "form-control center-block", placeholder = "Scrivi qui il tuo messaggio", required = "required" })
+                                        @Html.ValidationMessageFor(m => m.Richiesta, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        @Html.CheckBoxFor(m => m.Privacy, new { @class = "chekbox", required = "required" })
+                                        @Html.ValidationMessageFor(m => m.Privacy, "", new { @class = "text-danger" })
+                                        Accetta documento privacy
+                                        <br /><a href="/Home/Privacy" target="_blank">Leggi il documento</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="g-recaptcha" data-sitekey="6Lfl-0MUAAAAAMsYisTLnizioT9DoJpTGtSZ8lSx">
+                                </div>
+                                @ViewBag.Message
+                                <input type="submit" class="btn btn-success" value="Invia" />
+                            </div>
+                        }
+
+
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
-    <div class="col col-md-4">
-        <h2 class="text-center">Privati</h2>
-        <div class="thumbnail">
-            <img class="imgHome img-circle" src="~/Content/Images/Assistenza2-500.jpg" />
-        </div>
-        <div class="div1">
-            <h3><a href="/Account/Login"><span class="fa fa-car"> Off Site</span></a></h3>
-            <ul>
-                <li>System recovery</li>
-                <li>Recupero dati</li>
-                <li>Ottimizzazione S.O.</li>
-                <li>Antivirus</li>
-            </ul>
-        </div>
-    </div>
-    <div class="col col-md-4">
-        <h2 class="text-center">Vendita</h2>
-        <div class="thumbnail">
-            <img class="imgHome img-circle" src="~/Content/Images/Assistenza3-500.jpg" />
-        </div>
-        <div class="div1">
-            <h3><a href="/Account/Login"><span class="fa fa-hdd-o">Hardware</span></a></h3>
-            <ul>
-                <li>Server</li>
-                <li>PC</li>
-                <li>Notebook</li>
-                <li>Ultra Notebook</li>
-                <li>Stampanti</li>
-            </ul>
-            <h3><a href="/Account/Login"><span class="fa fa-spinner">Software</span></a></h3>
-            <ul>
-                <li>Microsoft S.O.</li>
-                <li>Evolution</li>
-                <li>Office</li>
-                <li>Antivirus</li>
-            </ul>
-        </div>
-    </div>
 </div>
+<div class="container">
+    <div class="row">
+        <div class="col col-md-4">
+            <h2 class="text-center">Aziende</h2>
+            <div class="thumbnail">
+                <img class="imgHome img-circle" src="~/Content/Images/Assistenza1-500.jpg" />
+            </div>
+            <div class="div1">
+                <h3><a href="/Account/Login"><span class="fa fa-eercast"> A contratto</span></a></h3>
+                <ul>
+                    <li>Annuale</li>
+                    <li>No diritto di chiamata</li>
+                    <li>Monte ore personalizzati</li>
+                    <li>Tempi di intervento server</li>
+                </ul>
+                <h3><a href="/Account/Login"><span class="fa fa-phone-square"> A chiamata</span></a></h3>
+                <ul>
+                    <li>On Site</li>
+                    <li>Presso laboratorio</li>
+                </ul>
+                <h3><a href="/Account/Login"><span class="fa fa-calendar-check-o"> Programmata</span></a></h3>
+                <ul>
+                    <li>Fault prevention</li>
+                    <li>Backup strutturati</li>
+                    <li>Cleaning</li>
+                    <li>Manutenzione ordinaria</li>
+                </ul>
+                <h3><a href="/Account/Login"><span class="fa fa-object-group"> Global</span></a></h3>
+                <ul>
+                    <li>Data Recovery</li>
+                    <li>Analisi installato</li>
+                    <li>Progettazione</li>
+                    <li>Consulenza globale</li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="col col-md-4">
+            <h2 class="text-center">Privati</h2>
+            <div class="thumbnail">
+                <img class="imgHome img-circle" src="~/Content/Images/Assistenza2-500.jpg" />
+            </div>
+            <div class="div1">
+                <h3><a href="/Account/Login"><span class="fa fa-car"> Off Site</span></a></h3>
+                <ul>
+                    <li>System recovery</li>
+                    <li>Recupero dati</li>
+                    <li>Ottimizzazione S.O.</li>
+                    <li>Antivirus</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col col-md-4">
+            <h2 class="text-center">Vendita</h2>
+            <div class="thumbnail">
+                <img class="imgHome img-circle" src="~/Content/Images/Assistenza3-500.jpg" />
+            </div>
+            <div class="div1">
+                <h3><a href="/Account/Login"><span class="fa fa-hdd-o">Hardware</span></a></h3>
+                <ul>
+                    <li>Server</li>
+                    <li>PC</li>
+                    <li>Notebook</li>
+                    <li>Ultra Notebook</li>
+                    <li>Stampanti</li>
+                </ul>
+                <h3><a href="/Account/Login"><span class="fa fa-spinner">Software</span></a></h3>
+                <ul>
+                    <li>Microsoft S.O.</li>
+                    <li>Evolution</li>
+                    <li>Office</li>
+                    <li>Antivirus</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts{
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+    }
 

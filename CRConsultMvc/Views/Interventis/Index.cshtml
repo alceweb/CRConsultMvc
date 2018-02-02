@@ -1,0 +1,95 @@
+﻿@model IEnumerable<CRConsultMvc.Models.Interventi>
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container">
+
+    <h2 class="text-center">Interventi / Tickets</h2><hr class="hrl" />
+    <table class="table table-hover tablef">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataChiamata)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataIntervento)
+                </th>
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => model.NGettoni)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descrizione)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Chiuso)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.GroupBy(m => (m.DataChiamata.Year)).Select(m => new { data = m.Key, giorno = m.OrderByDescending(i => i.Chiuso)}))
+            {
+                var trint = "";
+                foreach (var item1 in item.giorno)
+                {
+                    if (item1.Chiuso == true)
+                    {
+                        trint = "alert-success";
+                    }
+                    else
+                    {
+                        trint = "alert-danger";
+                    }
+                             <tr class="@trint">
+                                <td>@item1.Nome.Nome</td>
+                                <td>
+                                    @item1.DataChiamata.ToString("dddd dd-MMM-yyyy")
+                                </td>
+                                <td>
+                                    @if (item1.DataIntervento != null)
+                                                {
+                                            @item1.DataIntervento.Value.ToString("dddd dd-MMM-yyyy")
+
+                                    }
+                                </td>
+                                <td class="text-right">
+
+                                    @Html.DisplayFor(modelItem => item1.NGettoni)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item1.Descrizione)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item1.Chiuso)
+                                </td>
+                                <td>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+
+                                        @Html.ActionLink(" ", "Edit", new { id = item1.Intervento_Id }, new { @class = "fa fa-pencil fa-2x" })
+                                        @Html.ActionLink(" ", "Delete", new { id = item1.Intervento_Id }, new { @class = "fa fa-trash fa-2x text-danger " })
+                                    }
+                                </td>
+                            </tr>
+
+                }
+
+            }
+        </tbody>
+    </table>
+
+
+
+</div>
+@section Scripts{
+<script src="~/Scripts/jquery.filtertable.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.tablef').filterTable();
+        });
+    </script>
+
+    }

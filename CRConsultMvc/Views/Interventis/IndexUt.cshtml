@@ -1,0 +1,143 @@
+﻿@model IEnumerable<CRConsultMvc.Models.Interventi>
+
+@{
+    ViewBag.Title = "IndexUt";
+}
+<div class="container">
+
+    <h2 class="text-center">Tickets & Interventi</h2>
+    @if (ViewBag.GettoniR > 0)
+    {
+        <h3>Hai ancora @ViewBag.GettoniR gettoni</h3>
+        <div >
+            @Html.ActionLink("Richiedi intervento", "CreateUt", new {uid = ViewBag.Uid }, new { @class = "btn btn-primary" })
+        </div>
+
+    }
+    else
+    {
+        <h3 class="text-danger">Non hai gettoni a disposizione</h3>
+        <h5>
+            @Html.ActionLink("Acquista gettoni", "CreateUt", "Gettonis")
+            <!-- Button trigger modal info gettoni -->
+            <a href="#ModalInfo" data-toggle="modal">
+                <span class="fa fa-question-circle"></span>
+            </a>
+        </h5>
+
+            <!-- Modal info gettoni-->
+            <div class="modal fade" id="ModalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title text-center" id="myModalLabel">Perchè devo acquistare gettoni?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h4 class="text-center">
+                                I gettoni ti danno la possibilità di contattare o essere contattato da un esperto
+                            </h4><hr class="hrl" />
+                           <h4>Clienti senza contratto</h4>
+                            <p>
+                                L'acquisto di gettoni è una proposta di acquisto, quindi <strong>non comporta nessun impegno economico.</strong>
+                            </p>
+                            <p>
+                                Una volta acquistato il gettone (ne basta uno) hai la possibilità di esporre il tuo problema e di richiedere l'aiuto di un esperto.
+                            </p>
+                            <p>
+                                La persona incaricata ti contatta, viene fatta un'analisi del problema e viene stimata l'entità (si quantifica quanti gettoni verranno utilizzati) dell'intervento per la risoluzione.<br/>
+                                Possibili soluzioni
+                                <ul >
+                                    <li>Intervento guidato</li>
+                                    <li>Presso i nostri uffici</li>
+                                    <li>Presso la vostra sede</li>
+                                </ul>
+                            </p>
+                            <p>
+                                Solo se accetterai la proposta l'intervento verrà eseguito e poi pagherai i gettoni utilizzati.
+                            </p><hr class="hrl" />
+                            <h4>Clienti a contratto</h4>
+                            <p>Per i clienti a contratto ci sono varie fasce con relative agevolazioni contrattate al momento dell'attivazione del contratto</p>
+                            <ul>
+                                <li>25 gettoni</li>
+                                <li>50 gettoni</li>
+                                <li>100 gettoni</li>
+                                <li>400 gettoni</li>
+                            </ul>
+                            <p>I gettoni sono prepagati, hanno una durata di un'anno e danno diritto a speciali agevolazioni</p>
+                            <ul>
+                                <li>Minori costi</li>
+                                <li>Nessun diritto fisso di chiamata in caso di intervento presso la Vs sede</li>
+                                <li>Tempi di intervento più veloci</li>
+                                <li>Connessione remota presidiata</li>
+                            </ul>
+                            <a href="#nogo" class="btn btn-sm btn-primary">Contattaci per attivare un contratto</a>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                       </div>
+                    </div>
+                </div>
+            </div>
+       }
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataChiamata)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataIntervento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model =>model.Descrizione)
+                </th>
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => model.NGettoni) usati<br/>
+                </th>
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => model.Chiuso)
+                </th>
+                <th></th>
+            </tr>
+
+        </thead>
+        <tbody>
+
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-danger">
+                        @item.DataChiamata.ToString("dddd dd-MMM-yyyy")
+                    </td>
+                   <td class="text-success">
+                       @if (item.DataIntervento != null)
+                       {
+                        <span>@item.DataIntervento.Value.ToString("dddd dd-MMM-yyyy")</span><span class="h4">@item.DataIntervento.Value.ToString("HH.mm")</span>
+
+                       }
+                    </td>
+                    <td>
+                        @Html.Raw(item.Descrizione)
+                    </td>
+                    <td class="text-right">
+                        @Html.DisplayFor(modelItem => item.NGettoni)
+                    </td>
+                    <td class="text-right">
+                        @Html.DisplayFor(modelItem => item.Chiuso)
+                    </td>
+                    <td>
+                        @if (User.IsInRole("Admin"))
+                        {
+
+                            @Html.ActionLink(" ", "Edit", null, new {@class= "fa fa-pencil fa-2x text-primary", id = item.Intervento_Id })
+                            @Html.ActionLink(" ", "Delete", null, new {@class="fa fa-trash fa-2x text-danger ", id = item.Intervento_Id })
+                        }
+                   </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

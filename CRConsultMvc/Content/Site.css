@@ -1,9 +1,16 @@
-﻿body {
-    padding-top: 60px;
-    padding-bottom: 20px;
-    background-color:#cfcfcf;
+﻿html{
+    background-color:#22334d
 }
-
+body {
+    padding-top: 60px;
+    background-color: #cfcfcf;
+    font-family: 'Segoe UI','Segoe',Tahoma,Helvetica,Arial,sans-serif;
+    color: #636363;
+}
+/*Problema content filter margine destro della classe row datalist bootstrap*/
+.row{
+    margin-right:0px !important;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -61,6 +68,12 @@ textarea {
 .imgNav{
     height:35px;
 }
+.img-usr {
+    height: 50px;
+    border: solid 2px #fff;
+    border-radius: 50%;
+}
+
 footer{
     padding:10px;
     color:#777777;
@@ -70,7 +83,8 @@ footer{
     padding-left:40%;
 }
 .div2 {
-    margin: 3% 0 3% 0;
+    margin-top:1%;
+    margin-bottom:1%;
     font-size:1.2em;
 }
 .divWeb {
@@ -110,6 +124,7 @@ footer{
     bottom:50%;
     right:-20px;
     transition: all ease 1s;
+    z-index:9000;
 }
 .docu ul{
     list-style: none
@@ -159,3 +174,69 @@ footer{
         border-radius: 4px;
         transition: all 1s ease;
     }
+
+.div-assistenza {
+    background-image: url('Images/PC-problema.jpg');
+    background-size: cover;
+    background-position:center;
+    min-height:400px;
+    color:rgba(50, 50, 50, 0.75);
+    text-shadow: 0px 0px 1px #fff;
+}
+.plug-assistenza{
+    /*position:fixed;*/
+    right:0;
+    bottom:0;
+    z-index:9000;
+    padding:10px;
+    color:#cfcfcf;
+    text-shadow:0px 0px 1px #000;
+}
+    .plug-assistenza i {
+        z-index: 9000;
+    }
+.plug-assistenza plug{
+	position: relative;
+    display: flex;
+    flex-direction: column;
+    top:50%;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 0 0.25em 0;
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    grid-area: title;
+    font-size:2em;
+    text-align:center;
+    z-index:9000;
+}
+    .plug-assistenza img {
+        width:170px;
+        transition: all ease 1s;
+        border-radius:50%;
+        border: solid #fff 3px;
+        margin-top:30px;
+    }
+    .plug-assistenza img:hover {
+        transition: all ease 1s;
+        transform:scale(1.4);
+        z-index:1;
+    }
+
+
+.hrl {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0));
+}
+
+.hr2 {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to left, rgba(255, 106, 0, 0), rgba(255, 106, 0, 0.8));
+}

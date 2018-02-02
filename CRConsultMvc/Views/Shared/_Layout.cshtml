@@ -7,8 +7,7 @@
     <title>@ViewBag.Title - C.R.Consult</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
-</head>
+ </head>
 <body>
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -24,6 +23,14 @@
                     <li>@Html.ActionLink("Networking", "Networking", "Home")</li>
                     <li>@Html.ActionLink("Webb App", "WebPage", "Home")</li>
                     <li>@Html.ActionLink("Assistenza", "Assistenza", "Home")</li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li><a href="@Url.Action("Index", "RolesAdmin")" ><span class="glyphicon glyphicon-tag text-success"></span></a></li>
+                        <li><a href="@Url.Action("Index", "UsersAdmin")"><span class="glyphicon glyphicon-user text-success"></span></a></li>
+                        <li><a href="@Url.Action("Index", "Interventis")"><span class="fa fa-list text-success"></span></a></li>
+                    }
+
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -59,17 +66,14 @@
             </li>
       </ul>
    </div>
-
-    <div class="container">
+    
         <div class="row">
-            <a class="navbar-brand" href="/Home/Index">
+            <a class="navbar-brand" href="/Home/Index1">
                 <img class="imgLogo" alt="Logo" src="~/Content/Images/LogoAC.png" />
                 <span class="textLogo">Information Technology - Web Developer</span>
             </a>
         </div><hr />
         @RenderBody()
-
-    </div>
     <footer>
         <div class="container">
             <div class="row">

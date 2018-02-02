@@ -68,6 +68,10 @@ namespace CRConsultMvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            if(returnUrl == null)
+            {
+                returnUrl = "/Interventis";
+            }
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -163,7 +167,7 @@ namespace CRConsultMvc.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Conferma account", "Per confermare l'account, fare clic <a href=\"" + callbackUrl + "\">qui</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("CompletaRegistrazione", "Home");
                 }
                 AddErrors(result);
             }
@@ -392,7 +396,7 @@ namespace CRConsultMvc.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index1", "Home");
         }
 
         //

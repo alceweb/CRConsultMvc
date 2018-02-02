@@ -1,0 +1,322 @@
+﻿@model CRConsultMvc.Models.EmailFormModel
+@{
+    ViewBag.Title = "Home Page";
+}
+<div class="container">
+
+    <div class="row">
+        <div class="col col-md-4 text-center">
+            <h4>
+                Networking
+            </h4>
+            <div class="thumbnail">
+                <a href="/Home/Networking"><img class="imgHome img-circle" src="~/Content/Images/NetWork500.jpg" /></a>
+                <div class="caption" id="caption-half-down">
+                    <h4 class="">Reti</h4>
+                    <p>LAN, WAN, Wireless, Wired</p>
+                    <h4>Server</h4>
+                    <p>
+                        Microsoft srv 2012, Hyper-V
+                    </p>
+                </div>
+                <div class="caption" id="caption-half-up">
+                    <div class="row">
+                        <div class="col col-sm-3">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalNet">
+                                Contattaci
+                            </button>
+                        </div>
+                        <div class="col col-sm-6">
+                            <img class="img-circle imgUp" src="~/Content/Images/NetWork200x200.jpg" />
+
+                        </div>
+                        <div class="col col-sm-3">
+                            <a class="btn btn-primary" href="/Home/Networking">
+                                altro...
+                            </a>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col col-md-4">
+            <h4 class="text-center">Web App</h4>
+            <div class="thumbnail">
+                <a href="/Home/WebPage"><img class="imgHome img-circle" src="~/Content/Images/WebApp.jpg" /></a>
+                <div class="caption" id="caption-half-down">
+                    <h4>Sviluppo Web</h4>
+                    <p>
+                        ASP.NET, PHP, Microsoft Azure
+                    </p>
+                    <h4>CMS</h4>
+                    <p>
+                        Joomla, Drupal
+
+                    </p>
+                </div>
+                <div class="caption" id="caption-half-up">
+                    <div class="row">
+                        <div class="col col-sm-3">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalWeb">
+                                Contattaci
+                            </button>
+                        </div>
+                        <div class="col col-sm-6">
+                            <img class="img-circle imgUp" src="~/Content/Images/WebApp200x200.jpg" />
+
+                        </div>
+                        <div class="col col-sm-3">
+                            <a class="btn btn-primary" href="/Home/WebPage">
+                                altro...
+                            </a>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-md-4">
+            <h4 class="text-center">Assistenza</h4>
+            <div class="thumbnail">
+                <a href="/Home/Assistenza"><img class="imgHome img-circle" src="~/Content/Images/Assistenza500.jpg" /></a>
+                <div class="caption" id="caption-half-down">
+                    <h4>Aziende</h4>
+                    <p>On Site, Remote assistance, a contratto</p>
+                    <h4>Privati</h4>
+                    <p>Problem solving, a chiamata</p>
+                </div>
+                <div class="caption" id="caption-half-up">
+                    <div class="row">
+                        <div class="col col-sm-3">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalAss">
+                                Contattaci
+                            </button>
+                        </div>
+                        <div class="col col-sm-6">
+                            <img class="img-circle imgUp" src="~/Content/Images/Assistenza200x200.jpg" />
+
+                        </div>
+                        <div class="col col-sm-3">
+                            <a class="btn btn-primary" href="/Home/Assistenza">
+                                altro...
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Modal Networking-->
+    <div class="modal fade" id="ModalNet" tabindex="-1" role="dialog" aria-labelledby="Contatto Networking">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-center" id="myModalLabel">
+                        <img class="img-circle" src="~/Content/Images/NetWork50x50.jpg" />
+                        Contatto Networking
+                    </h4>
+                </div>
+                @using (Html.BeginForm("Index1", "Home", null, FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                    @Html.AntiForgeryToken()
+                    <div class="modal-body">
+                        <div class="form-group">
+                            @Html.HiddenFor(m => m.settore, new { value = "Networking" })
+                            @Html.LabelFor(m => m.Nome, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", placeholder = "Nome Cognome", required = "required" })
+                                @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Ditta, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Ditta, new { @class = "form-control", placeholder = "Intestazion ditta", required = "required" })
+                                @Html.ValidationMessageFor(m => m.Ditta, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Telefono, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Telefono, new { @class = "form-control", placeholder = "Telefono / cellulare", required = "required" })
+                                @Html.ValidationMessageFor(m => m.Telefono, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "La tua mail", required = "required" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Messaggio, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-10">
+                                @Html.TextAreaFor(m => m.Messaggio, new { @class = "form-control", placeholder = "Scrivi qui il tuo messaggio", required = "required" })
+                                @Html.ValidationMessageFor(m => m.Messaggio, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Privacy, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-10">
+                                @Html.CheckBoxFor(m => m.Privacy, new { @class = "chekbox", required = "required" })
+                                Accetta il documento della privacy<br />
+                                <a href="/Home/Privacy" target="_blank">Leggi il documento</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-danger" data-dismiss="modal">Annulla</button>
+                        <input type="submit" class="btn btn-success" value="Invia" />
+                    </div>
+            }
+            </div>
+        </div>
+    </div>
+    <!-- Modal Web App-->
+    <div class="modal fade" id="ModalWeb" tabindex="-1" role="dialog" aria-labelledby="Contatto Web">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-center" id="myModalLabel">
+                        <img class="img-circle" src="~/Content/Images/WebApp50x50.jpg" />
+                        Contatto Web App
+                    </h4>
+                </div>
+                @using (Html.BeginForm("Index1", "Home", null, FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                    @Html.AntiForgeryToken()
+                    <div class="modal-body">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Nome, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", placeholder = "Nome Cognome", required = "required" })
+                                @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Ditta, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Ditta, new { @class = "form-control", placeholder = "Intestazion ditta", required = "required" })
+                                @Html.ValidationMessageFor(m => m.Ditta, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Telefono, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Telefono, new { @class = "form-control", placeholder = "Telefono / cellulare", required = "required" })
+                                @Html.ValidationMessageFor(m => m.Telefono, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "La tua mail", required = "required" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Messaggio, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-10">
+                                @Html.TextAreaFor(m => m.Messaggio, new { @class = "form-control", placeholder = "Scrivi qui il tuo messaggio", required = "required" })
+                                @Html.ValidationMessageFor(m => m.Messaggio, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Privacy, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-10">
+                                @Html.CheckBoxFor(m => m.Privacy, new { @class = "chekbox", required = "required" })
+                                Accetta il documento della privacy<br />
+                                <a href="/Home/Privacy" target="_blank">Leggi il documento</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-danger" data-dismiss="modal">Annulla</button>
+                        <input type="submit" class="btn btn-success" value="Invia" />
+                    </div>
+            }
+            </div>
+        </div>
+    </div>
+    <!-- Modal Assistenza-->
+    <div class="modal fade" id="ModalAss" tabindex="-1" role="dialog" aria-labelledby="Contatto Assistenza">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-center" id="myModalLabel">
+                        <img class="img-circle" src="~/Content/Images/Assistenza50x50.jpg" />
+                        Contatto Assistenza
+                    </h4>
+                </div>
+                @using (Html.BeginForm("Index1", "Home", null, FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                    @Html.AntiForgeryToken()
+                    <div class="modal-body">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Nome, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", placeholder = "Nome Cognome", required = "required" })
+                                @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Ditta, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Ditta, new { @class = "form-control", placeholder = "Intestazion ditta", required = "required" })
+                                @Html.ValidationMessageFor(m => m.Ditta, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Telefono, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Telefono, new { @class = "form-control", placeholder = "Telefono / cellulare", required = "required" })
+                                @Html.ValidationMessageFor(m => m.Telefono, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "La tua mail", required = "required" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Messaggio, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-10">
+                                @Html.TextAreaFor(m => m.Messaggio, new { @class = "form-control", placeholder = "Scrivi qui il tuo messaggio", required = "required" })
+                                @Html.ValidationMessageFor(m => m.Messaggio, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Privacy, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-10">
+                                @Html.CheckBoxFor(m => m.Privacy, new { @class = "chekbox", required = "required" })
+                                Accetta il documento della privacy<br />
+                                <a href="/Home/Privacy" target="_blank">Leggi il documento</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-danger" data-dismiss="modal">Annulla</button>
+                        <input type="submit" class="btn btn-success" value="Invia" />
+                    </div>
+            }
+            </div>
+        </div>
+    </div>
+    <div class="div2">
+        <p>In questo sito non troverai la nostra <strong><em>"mission"</em></strong>, non ti diremo qual'è la <strong><em>"filosofia"</em></strong> del nostro lavoro, non ti giureremo di essere i migliori sul mercato.</p>
+        <p>Qui troverai quello che abbiamo fatto e tutto quello che sappiamo fare, ma saranno solo parole facili da inventare e facilissime da scrivere.</p>
+        <p>Se vuoi metterci alla prova chiamaci; ci incontreremo, ci confronteremo e solo se il nostro lavoro è quello che cerchi potremo collaborare.</p>
+
+    </div>
+</div>

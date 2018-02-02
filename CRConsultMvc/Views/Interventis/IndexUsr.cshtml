@@ -1,0 +1,52 @@
+﻿@model IEnumerable<CRConsultMvc.Models.Interventi>
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container">
+
+    @foreach (var item in Model.GroupBy(u => u.Nome.Nome).Select(u => new { utente = u.Key, data = u.OrderByDescending(i => i.DataChiamata) }))
+    {
+        <h2 class="text-center">Interventi di @item.utente</h2><hr class="hrl" />
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td>
+                        Data chiamata
+                    </td>
+                    <td>
+                        Data intervento
+                    </td>
+                    <td>
+                        Chiuso
+                    </td>
+                    <td> Gettoni usati</td>
+                </tr>
+
+            </thead>
+            <tbody>
+
+                @foreach (var item1 in item.data)
+                {
+                    <tr>
+                        <td>
+                            @item1.DataChiamata.ToString("ddd dd-MMM-yyyy")
+
+                        </td>
+                        <td>
+                            @item1.DataIntervento
+                        </td>
+                        <td>
+                            @item1.Chiuso
+                        </td>
+                        <td>
+                            @item1.NGettoni
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+</div>

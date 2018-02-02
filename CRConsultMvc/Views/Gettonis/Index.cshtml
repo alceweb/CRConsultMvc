@@ -1,0 +1,70 @@
+﻿@model IEnumerable<CRConsultMvc.Models.Gettoni>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container">
+
+    <div class="container">
+        <h2>Gettoni </h2>
+
+        <p>
+            qui @Html.DisplayNameFor(model => model.Nome.Nome)
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table table-hover">
+            <thead>
+
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Data)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NGettoni)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Totale)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Pagato)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nome.Nome)
+                            @Html.DisplayFor(modelItem => item.Nome.Cognome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Data)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NGettoni)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Totale)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Pagato)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Gettone_id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Gettone_id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Gettone_id })
+                        </td>
+                    </tr>
+            }
+            </tbody>
+
+        </table>
+
+    </div>
+</div>

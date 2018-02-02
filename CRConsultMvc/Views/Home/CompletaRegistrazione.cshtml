@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "CompletaRegistrazione";
+}
+
+<h2>Registrazione completata</h2>
+<div class="row">
+    <div class="col-md-2">
+        <img class="img-responsive" src="~/Content/Images/ok.png" />
+
+    </div>
+    <div class="col-md-10">
+        <h2>
+            La registrazione è stata completata con successo
+        </h2>
+        <h4>
+            Adesso puoi accedere alle aree riservate agli utenti registrati<br />
+            Tuttavia se vuoi utilizzare tutti i servizi o acquistare gettoni per l'assistenza on-line devi completare i dati del tuo profilo
+        </h4>
+        <a href="@Url.Action("Edit", "UsersAdmin", new {id = ViewBag.Uid})" class="btn btn-success"><span class="fa fa-pencil"></span> Completa profilo</a>
+
+    </div>
+</div>
+<h1></h1>
+
