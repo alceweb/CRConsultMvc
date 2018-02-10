@@ -7,17 +7,20 @@
    </h1>
 
 <div class="row div-assistenza">
-    <div class="col-md-6">
+    <div class="col-sm-6">
 
     </div>
-    <div class="col-md-6 text-center">
-        <h1 >Problemi con l'informatica?</h1>
+    <div class="col-sm-6 text-center">
+        <h3 >Problemi con l'informatica?</h3>
         <a role="button" data-toggle="modal" href="#modalass" aria-expanded="false" aria-controls="modalass">
-            <span class="fa fa-street-view fa-3x"> Contatta un esperto</span>
+            <h2 class="fa fa-street-view fa-3x"> Contatta un esperto</h2>
         </a>
         <hr class="hrl" />
-        <h1 >Sei già nostro cliente?</h1>
-        <a href="@Url.Action("IndexUt", "Interventis")"><span class="fa fa-user fa-3x"> Entra nell'area riservata</span></a>
+        <h3 >Sei già nostro cliente?</h3>
+        <a href="@Url.Action("Riservata", "Interventis")"><h2 class="fa fa-user fa-3x"> Entra nell'area riservata</h2></a>
+        <hr class="hrl" />
+        <h3>Vuoi attivare un contratto?</h3>
+        <a href="@Url.Action("FormContratto", "Home")"><h2 class="fa fa-paste fa-3x"> Chiedi informazioni</h2></a>
 
         <!-- Modal -->
         <div class="modal fade" id="modalass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

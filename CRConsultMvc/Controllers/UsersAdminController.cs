@@ -234,6 +234,84 @@ namespace CRConsultMvc.Controllers
             return View();
         }
 
+        public async Task<ActionResult> EditUs(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var user = await UserManager.FindByIdAsync(id);
+            ViewBag.Uid = id;
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(new EditUserViewModel()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                UserName = user.UserName,
+                Nome = user.Nome,
+                Cognome = user.Cognome,
+                Indirizzo = user.Indirizzo,
+                Città = user.Città,
+                CAP = user.CAP,
+                Telefono = user.Telefono,
+                Ditta = user.Ditta,
+                PartitaIva = user.PartitaIva,
+                CodiceFiscale = user.CodiceFiscale,
+            });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditUs([Bind(Include = "Id,Email,UserName,Nome,Cognome,Indirizzo,Città,CAP,Telefono,Ditta,PartitaIva,CodiceFiscale")] EditUserViewModel editUser, params string[] selectedRole)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByIdAsync(editUser.Id);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+
+                user.UserName = editUser.Email;
+                user.UserName = editUser.UserName;
+                user.Email = editUser.Email;
+                user.Nome = editUser.Nome;
+                user.Cognome = editUser.Cognome;
+                user.Indirizzo = editUser.Indirizzo;
+                user.Città = editUser.Città;
+                user.CAP = editUser.CAP;
+                user.Telefono = editUser.Telefono;
+                user.Ditta = editUser.Ditta;
+                user.PartitaIva = editUser.PartitaIva;
+                user.CodiceFiscale = editUser.CodiceFiscale;
+                var userRoles = await UserManager.GetRolesAsync(user.Id);
+
+                selectedRole = selectedRole ?? new string[] { };
+
+                var result = await UserManager.AddToRolesAsync(user.Id, selectedRole.Except(userRoles).ToArray<string>());
+
+                if (!result.Succeeded)
+                {
+                    ModelState.AddModelError("", result.Errors.First());
+                    return View();
+                }
+                result = await UserManager.RemoveFromRolesAsync(user.Id, userRoles.Except(selectedRole).ToArray<string>());
+
+                if (!result.Succeeded)
+                {
+                    ModelState.AddModelError("", result.Errors.First());
+                    return View();
+                }
+                return RedirectToAction("Riservata", "Interventis");
+            }
+            ModelState.AddModelError("", "Something failed.");
+            return View();
+        }
+
 
         //
         // GET: /Users/Delete/5

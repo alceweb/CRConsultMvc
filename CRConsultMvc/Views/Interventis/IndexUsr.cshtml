@@ -27,7 +27,16 @@
 
                 @foreach (var item1 in item.data)
                 {
-                    <tr>
+                    var trint = "";
+                    if (item1.Chiuso == true)
+                    {
+                        trint = "alert-danger";
+                    }
+                    else
+                    {
+                        trint = "alert-success";
+                    }
+                    <tr class="@trint">
                         <td>
                             @item1.DataChiamata.ToString("ddd dd-MMM-yyyy")
 
@@ -41,8 +50,7 @@
                         <td>
                             @item1.NGettoni
                         </td>
-                        <td>
-                        </td>
+                        <td></td>
                     </tr>
                 }
             </tbody>

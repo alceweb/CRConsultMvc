@@ -2,15 +2,17 @@
 @{
     ViewBag.Title = "Gestione profilo";
 }
+<div class="container">
 
-<h2>@ViewBag.Title </h2>
-<hr />
-<ul class="list-unstyled">
-    <li>
-        <h3><span class="fa fa-key"> @Html.ActionLink("Cambia password", "ChangePassword", "Manage")</span></h3>
-    </li>
-    <li>
-        <h3><span class="fa fa-address-card-o"> @Html.ActionLink("Dati anagrafici", "Edit", new { id = @ViewBag.uid })</span></h3>
-    </li>
-</ul>
+    <h2>@ViewBag.Title </h2>
+    <hr />
+    <ul class="list-unstyled">
+        <li>
+            <h3><span class="fa fa-key"> @Html.ActionLink("Cambia password", "ChangePassword", "Manage")</span></h3>
+        </li>
+        <li>
+            <h3><span class="fa fa-address-card-o"> @Html.ActionLink("Dati anagrafici", "EditUs", new { id = @ViewBag.uid })</span></h3>
+        </li>
+    </ul>
+</div>
 

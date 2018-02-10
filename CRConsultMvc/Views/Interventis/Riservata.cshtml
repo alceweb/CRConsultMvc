@@ -1,0 +1,192 @@
+﻿
+@{
+    ViewBag.Title = "Riservata";
+}
+
+<div class="container">
+    <div class="well well-sm">
+
+        <h1 class="text-center"><span class="fa fa-user"></span>   @User.Identity.Name</h1>
+        <h2 class="text-center"><span class="fa fa-key"></span> Area riservata</h2>
+        <p class="lead">Nella tua area riservata puoi gestire le tue richieste di assistenza, la situazione gettoni, aprire un ticket, controllare gli interventi.</p>
+        <a href="@Url.Action("CreateUt", "Interventis")" class="btn btn-warning">Apri un ticket</a>
+    </div>
+
+    <div>
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#ticket" aria-controls="ticket" role="tab" data-toggle="tab"><h3>Ticket</h3></a></li>
+            <li role="presentation"><a href="#gettoni" aria-controls="gettoni" role="tab" data-toggle="tab"><h3>Gettoni</h3></a></li>
+            <li role="presentation"><a href="#profilo" aria-controls="profilo" role="tab" data-toggle="tab"><h3>Profilo</h3></a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active" id="ticket">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                Data chiamata
+                            </th>
+                            <th>
+                                Data intervento
+                            </th>
+                            <th>
+                                Descrizione
+                            </th>
+                            <th class="text-right">
+                                Gettoni usati<br />
+                            </th>
+                            <th class="text-right">
+                                Stato
+                            </th>
+                            <th></th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in ViewBag.Interventi)
+                        {
+                            var trint = "";
+                            var close = "";
+                            if (item.Chiuso == true)
+                            {
+                                trint = "alert-danger";
+                                close = "fa fa-lock fa-2x";
+                            }
+                            else
+                            {
+                                trint = "alert-success";
+                                close = "fa fa-unlock-alt fa-2x";
+                            }
+                            <tr class="@trint">
+                                <td>
+
+                                    @item.DataChiamata.ToString("dddd dd-MMM-yyyy")
+                                </td>
+                                <td>
+                                    @if (item.DataIntervento != null)
+                                    {
+                                        <span>@item.DataIntervento.ToString("dddd dd-MMM-yyyy")</span>
+
+                                    }
+                                </td>
+                                <td>
+                                    @Html.Raw(item.Descrizione)
+                                </td>
+                                <td class="text-right">
+                                    @item.NGettoni
+                                </td>
+                                <td class="text-right">
+                                    <span class="@close"></span>
+                                </td>
+                                <td>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+
+                                        @Html.ActionLink(" ", "Edit", null, new { @class = "fa fa-pencil fa-2x text-primary", id = item.Intervento_Id })
+                                        @Html.ActionLink(" ", "Delete", null, new { @class = "fa fa-trash fa-2x text-danger ", id = item.Intervento_Id })
+                                    }
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                    </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="gettoni">
+                <table class="table table-hover">
+                    <thead>
+
+                        <tr>
+                            <th>
+                                Data
+                            </th>
+                            <th>
+                                N. Gettoni
+                            </th>
+                            <th>
+                                Totale
+                            </th>
+                            <th>
+                                Pagato
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in ViewBag.Gettoni)
+            {
+                            <tr>
+                                <td>
+                                    @item.Data
+                                </td>
+                                <td>
+                                    @item.NGettoni
+                                </td>
+                                <td>
+                                    @item.Totale
+                                </td>
+                                <td>
+                                    @item.Pagato
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="profilo">
+                <div class="row">
+                    <div class="col-md-8">
+                        <dl class="dl-horizontal">
+                            <dt>User name</dt>
+                            <dd>@ViewBag.User.UserName</dd>
+                            <dt>Email</dt>
+                            <dd>@ViewBag.User.Email</dd>
+                            <dt>Nome</dt>
+                            <dd>@ViewBag.User.Nome</dd>
+                            <dt>Cognome</dt>
+                            <dd>@ViewBag.User.Cognome</dd>
+                            <dt>Indirizzo</dt>
+                            <dd>@ViewBag.User.Indirizzo<br />
+                                @ViewBag.User.CAP @ViewBag.User.Città
+                            </dd>
+                            <dt>Telefono</dt>
+                            <dd>@ViewBag.User.Telefono</dd>
+                            <dt>Azienda</dt>
+                            <dd>@ViewBag.User.Ditta</dd>
+                            <dt>Codice Fiscale</dt>
+                            <dd>@ViewBag.User.CodiceFiscale</dd>
+                            <dt>Partita Iva</dt>
+                            <dd>@ViewBag.User.PartitaIva</dd>
+                        </dl>
+                        
+
+
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="list-unstyled">
+                            <li>
+                                <h3><span class="fa fa-key text-danger"> @Html.ActionLink("Cambia password", "ChangePassword", "Manage", null, new { @class = "text-danger" })</span></h3>
+                            </li>
+                            <li>
+                                <h3><span class="fa fa-address-card-o text-warning"> @Html.ActionLink("Dati anagrafici", "EditUs", "UsersAdmin", new { id = ViewBag.Uid }, new { @class = "text-warning" })</span></h3>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+@section Scripts{
+    }

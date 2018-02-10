@@ -49,9 +49,8 @@ namespace CRConsultMvc.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Posta elettronica")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "User name")]
+        public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

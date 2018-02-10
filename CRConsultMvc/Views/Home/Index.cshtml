@@ -14,40 +14,52 @@
     <meta name="viewport" content="width=device-width" />
     <title>Home</title>
     <link href="~/Content/base.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
-    <link href="~/Content/base.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <script src="~/Scripts/Anime/charming.min.js"></script>
     <script src="~/Scripts/Anime/anime.min.js"></script>
     <script src="~/Scripts/Anime/wordFx.js"></script>
 
 </head>
 <body>
+    <div class="intestazione">
+    <div><span class="h1">C.R.Consult</span> - Consulenza informatica per ditte e privati</div>
+        <div>Via degli Orti 11/d Caravaggio</div>
+    </div>
 
     <div class="slideshow plug-assistenza">
         <div class="slide slide--current">
-            <div class="slide__bg ">CRConsult</div>
             <h2 class="word">
-                serve<a href="@Url.Action("Index1", "Home")"><img src="~/Content/Images/NoGrazie.png" /></a>aiuto?
+                problemi con l'informatica?
             </h2>
         </div>
-        <plug>
-            <div class="row ">
-                <div class="col-md-6">
-                    <h3>Nuovo cliente o privato?<br/>
-                        <a href="@Url.Action("FormEsperto", "Home")"><img src="~/Content/Images/NPC-assistenza.jpg" /></a>
-                    </h3>
-                </div>
-                <div class="col-md-6">
-                    <h3>Sei già nostro cliente?<br/>
+            <table class="table plug">
+                <tr class="text-center">
+                    <td style="width:33%">
+                        <p>Ti aiutiamo noi</p>
+                            <a href="@Url.Action("FormEsperto", "Home")"><img src="~/Content/Images/NPC-assistenza.jpg" /></a>
+
+                    </td>
+                    <td style="width:33%">
+                        <a href="@Url.Action("Index1", "Home")"><img src="~/Content/Images/NoGrazie.png" /></a>
+                    </td>
+                    <td style="width:33%">
+                        <p>Sei già nostro cliente?</p>
                         <a href="@Url.Action("CreateUt", "Interventis")"><img src="~/Content/Images/ticket.png" /></a>
-                    </h3>
-                </div>
-            </div>
-        </plug>
+                    </td>
+                </tr>
+            </table>
     </div>
         <script>
-        {
+            {
+                $('document').ready(function () {
+                    $('.intestazione').hide();
+                    $('.plug').hide();
+                    $('.intestazione').delay(1000).fadeIn(4000);
+                    $('.plug').delay(2000).fadeIn(5000);
+                
+                });
             const effects = [
                 // Effect 1
                 {

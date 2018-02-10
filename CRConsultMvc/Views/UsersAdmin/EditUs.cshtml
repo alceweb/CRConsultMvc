@@ -1,101 +1,127 @@
-﻿@model CRConsultMvc.Models.EditUsViewModel
+﻿@model CRConsultMvc.Models.EditUserViewModel
 @{
     ViewBag.Title = "Gestione profilo";
 }
+<div class="container">
 
-<h2>@ViewBag.Title</h2>
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+    <h2>@ViewBag.Title</h2>
+    <hr class="hr1" />
+    <div class="row">
+        <div class="col col-md-4 text-center">
+            @if (File.Exists(@Server.MapPath("/Content/Images/FotoIscritti/" + @Html.DisplayFor(modelItem => Model.Id) + ".jpg")))
+            {
+                <div><img src="@Url.Content("~/Content/Images/FotoIscritti/" + @Html.DisplayFor(modelItem => Model.Id) + ".jpg")" /></div><br />
+                <div>@Html.ActionLink("Modifica", "FotoProfilo", new { id = Model.Id }, new { @class = "btn btn-primary" })</div>
+            }
+            else
+            {
+                <div><img src="@Url.Content("~/Content/Images/FotoIscritti/Anonimous.jpg")" /></div><br />
+            }
+        </div>
+        <div class="col col-md-8">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.Id)
 
-    <div class="form-horizontal">
-        <h4>Modifica dati anagrafici</h4>
-        <hr class="hr1" />
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.Id)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UserName, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.UserName)
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Email)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Nome)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Cognome, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Cognome, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Cognome)
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-md-2 control-label">@Html.LabelFor(m => m.Indirizzo)</span>
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Indirizzo, new { @class = "form-control", @placeholder = "Indirizzo" })
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-md-2 control-label">@Html.LabelFor(m => m.Città)</span>
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Città, new { @class = "form-control", @placeholder = "Città" })
-            </div>
-        </div>
-        <div class="form-group">
-            <span class="col-md-2 control-label">@Html.LabelFor(m => m.CAP)</span>
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.CAP, new { @class = "form-control", @placeholder = "CAP" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Telefono, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Telefono, new { @class = "form-control", @placeholder = "fisso o cellulare" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Ditta, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Ditta, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.PartitaIva, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.PartitaIva, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.CodiceFiscale, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.CodiceFiscale, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group alert">
-            @Html.LabelFor(model => model.Privato, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.CheckBoxFor(m => m.Privato, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Privato)
-            </div>
-        </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Nome)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Cognome, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Cognome, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Cognome)
+                        </div>
+                    </div>
 
-       <hr />
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Salva" class="btn btn-success" />
-                @Html.ActionLink("Annulla", "IndexUs", null, new { @class = "btn btn-primary" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Indirizzo, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Indirizzo, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Indirizzo)
+                        </div>
+                    </div>
 
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CAP, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.CAP, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CAP)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Città, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Città, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Città)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Telefono, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Telefono, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Telefono)
+                        </div>
+                    </div>
 
-            </div>
+                        <div class="form-group">
+
+                            @Html.LabelFor(model => model.Ditta, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Ditta, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Ditta)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PartitaIva, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.PartitaIva, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PartitaIva)
+                            </div>
+                        </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CodiceFiscale, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.CodiceFiscale, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CodiceFiscale)
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Salva" class="btn btn-success" />
+                            @Html.ActionLink("Annulla", "Riservata", "Interventis", null, new { @class = "btn btn-danger" })
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
-}
+
+</div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">

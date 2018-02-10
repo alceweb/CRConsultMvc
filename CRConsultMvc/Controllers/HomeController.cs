@@ -120,18 +120,63 @@ namespace CRConsultMvc.Controllers
                 var obj = JObject.Parse(result);
                 var status = (bool)obj.SelectToken("success");
                 ViewBag.Message = status ? "Recaptcha validato con successo" : "Devi dimostrare di non essere un robot";
-            if (ModelState.IsValid&& status)
+            if (ModelState.IsValid && status)
+            {
+
+                //Invio la mail a crconsult
+                MailMessage message = new MailMessage(
+                    "webservice@cr-consult.it",
+                    esperto.Email,
+                    "Abbiamo ricevuto la tua richiesta",
+                    "Gentile cliente, il giorno " + DateTime.Now.ToString("dddd dd MMM yyyy") + " alle "+ DateTime.Now.ToString("HH.mm")  + " abbiamo registrato la tua richiesta: <hr/>" +
+                    "Data: <strong>" + DateTime.Now + "</strong><br/>" +
+                    "Nome contatto: <strong>" + esperto.Nome + " <em>" + esperto.Ditta + " </em></strong><br/>Telefono: <strong>" + esperto.Telefono + "</strong><br/>Mail: <strong>[" + esperto.Email + "]</strong> <br/>" +
+                    "Motivo della richiesta: <br/><strong>" +
+                    esperto.Richiesta +
+                    "</strong><hr/>Verrai contattato al più presto da un nostro incaricato.<br/>Ti ricordo che questa richiesta di intervento non comporta nessun impegno economico.<br>" +
+                    "Se, dopo l'analisi del nostro esperto, saranno ritenuti necessari degli interventi a pagamento, ti verrà presentato un preventivo di spesa.<br/><br/>Cordiali saluti<br/>WebService C.R.Consult"
+                    );
+                message.IsBodyHtml = true;
+                MailAddress bcc = new MailAddress("cesare@cr-consult.eu");
+                message.Bcc.Add(bcc);
+                
+                using (var smtp = new SmtpClient())
+                {
+                    await smtp.SendMailAsync(message);
+                }
+                return RedirectToAction("FormOk", "Home");
+            }
+            return View(esperto);
+        }
+
+        public ActionResult FormContratto()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> FormContratto(EmailContratto contratto)
+        {
+            //Validate Google recaptcha here
+            var response = Request["g-recaptcha-response"];
+            string secretKey = "6Lfl-0MUAAAAAHRpIqwh_zXLB1jnN6MUPPcE4mKq";
+            var client = new WebClient();
+            var result = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secretKey, response));
+            var obj = JObject.Parse(result);
+            var status = (bool)obj.SelectToken("success");
+            ViewBag.Message = status ? "Recaptcha validato con successo" : "Devi dimostrare di non essere un robot";
+            if (ModelState.IsValid && status)
             {
 
                 //Invio la mail a crconsult
                 MailMessage message = new MailMessage(
                     "webservice@cr-consult.it",
                     "cesare@cr-consult.eu",
-                    "Richiesta informazioni dal sito cr-consult.eu",
+                    "Richiesta informazioni per attivazione contratto assistenza dal sito cr-consult.eu",
                     "Il giorno " + DateTime.Now + "<br/><strong>" +
-                    esperto.Nome + " <em> " + esperto.Ditta + " </em><br/>Tel." + esperto.Telefono + " [" + esperto.Email + "] " + "</strong> " +
-                    "<br/> ha inviato una richiesta di informazioni dal sito www.cr-consult.eu<hr/><strong>" +
-                    esperto.Richiesta +
+                    contratto.Nome + " <em> " + contratto.Ditta + " </em><br/>Tel." + contratto.Telefono + " [" + contratto.Email + "] " + "</strong> " +
+                    "<br/> ha inviato una richiesta di informazioni per attivazione cntratto di assistenza dal sito www.cr-consult.eu<hr/><strong>" +
+                    contratto.Note +
                     "</strong>"
                     );
                 message.IsBodyHtml = true;
@@ -142,15 +187,15 @@ namespace CRConsultMvc.Controllers
                 //Invio la mail al mittente
                 MailMessage message1 = new MailMessage(
                     "webservice@cr-consult.it",
-                    esperto.Email ,
-                    "La tua richiesta a www.cr-consult.eu",
+                    contratto.Email,
+                    "Richiesta di informazini per l'attivazione del contratto di manutenzione a www.cr-consult.eu",
                     "Gentile cliente, abbiamo ricevuto la tua richiesta dal sito cr-consult.eu.<hr/>" +
                     "Data: <strong>" + DateTime.Now + "</strong><br/>" +
-                    "Nome contatto: <strong>" + esperto.Nome + " <em>" + esperto.Ditta + " </em></strong><br/>Telefono: <strong>" + esperto.Telefono + "</strong><br/>Mail: <strong>[" + esperto.Email + "]</strong> <br/>" + 
+                    "Nome contatto: <strong>" + contratto.Nome + " <em>" + contratto.Ditta + " </em></strong><br/>Telefono: <strong>" + contratto.Telefono + "</strong><br/>Mail: <strong>[" + contratto.Email + "]</strong> <br/>" +
                     "Motivo della richiesta: <br/><strong>" +
-                    esperto.Richiesta +
-                    "</strong><hr/>Verrai contattato al più presto da un nostro incaricato.<br/>Ti ricordo che questa richiesta di intervento non comporta nessun impegno economico.<br>" +
-                    "Se, dopo l'analisi del nostro esperto, saranno ritenuti necessari degli interventi a pagamento, ti verrà presentato un preventivo di spesa.<br/>"
+                    contratto.Note +
+                    "</strong><hr/>Verrai contattato al più presto da un nostro incaricato per stabilire le modalità di incontro.<br/>" +
+                    "Ti ricordo che per attivare un contratto è necessaria un'analisi approfondita della strutttura informatica da assistere. Sarà quindi necessario un incontro che permetterà a noi di capire comìè strutturata la tua realtà e a te di conoscere personalmente che ti seguirà."
                     );
                 message1.IsBodyHtml = true;
                 using (var smtp = new SmtpClient())
@@ -159,9 +204,14 @@ namespace CRConsultMvc.Controllers
                 }
                 return RedirectToAction("FormOk", "Home");
             }
-            return View(esperto);
+            return View(contratto);
         }
 
+        [Authorize]
+        public ActionResult Riservata()
+        {
+            return View();
+        }
         public ActionResult FormOk()
         {
             return View();

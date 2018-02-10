@@ -5,85 +5,92 @@
 <div class="container">
 
     <h2 class="text-center">Interventi / Tickets</h2><hr class="hrl" />
-    <table class="table table-hover tablef">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DataChiamata)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DataIntervento)
-                </th>
-                <th class="text-right">
-                    @Html.DisplayNameFor(model => model.NGettoni)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Descrizione)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Chiuso)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.GroupBy(m => (m.DataChiamata.Year)).Select(m => new { data = m.Key, giorno = m.OrderByDescending(i => i.Chiuso)}))
-            {
-                var trint = "";
-                foreach (var item1 in item.giorno)
+    @foreach (var item in Model.GroupBy(i => i.Chiuso).OrderBy(i=>i.Key))
+    {
+        var trint = "";
+        var close = "";
+        if (item.Key == true)
+        {
+            trint = "alert-danger";
+            close = "fa fa-lock fa-2x text-danger";
+        }
+        else
+        {
+            trint = "alert-success";
+            close = "fa fa-unlock-alt fa-2x text-success";
+        }
+        <span class="@close"></span>
+
+
+        <table class="table table-hover tablef">
+            <thead>
+                <tr>
+                    <th>
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DataChiamata)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DataIntervento)
+                    </th>
+                    <th class="text-right">
+                        @Html.DisplayNameFor(model => model.NGettoni)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Descrizione)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Chiuso)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item1 in item.OrderByDescending(d=>d.DataChiamata))
                 {
-                    if (item1.Chiuso == true)
-                    {
-                        trint = "alert-success";
-                    }
-                    else
-                    {
-                        trint = "alert-danger";
-                    }
-                             <tr class="@trint">
-                                <td>@item1.Nome.Nome</td>
-                                <td>
-                                    @item1.DataChiamata.ToString("dddd dd-MMM-yyyy")
-                                </td>
-                                <td>
-                                    @if (item1.DataIntervento != null)
-                                                {
-                                            @item1.DataIntervento.Value.ToString("dddd dd-MMM-yyyy")
+                <tr class="@trint">
+                    <td>@item1.Nome.Nome</td>
+                    <td>
+                        @item1.DataChiamata.ToString("dd-MMM-yyyy")
+                    </td>
+                    <td>
+                        @if (item1.DataIntervento != null)
+                        {
+                            @item1.DataIntervento.Value.ToString("dd-MMM-yyyy")
 
-                                    }
-                                </td>
-                                <td class="text-right">
+                        }
+                    </td>
+                    <td class="text-right">
 
-                                    @Html.DisplayFor(modelItem => item1.NGettoni)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item1.Descrizione)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item1.Chiuso)
-                                </td>
-                                <td>
-                                    @if (User.IsInRole("Admin"))
-                                    {
+                        @Html.DisplayFor(modelItem => item1.NGettoni)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item1.Descrizione)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item1.Chiuso)
+                    </td>
+                    <td>
+                        <span class="@close"></span>
+                        @if (User.IsInRole("Admin"))
+                        {
 
-                                        @Html.ActionLink(" ", "Edit", new { id = item1.Intervento_Id }, new { @class = "fa fa-pencil fa-2x" })
-                                        @Html.ActionLink(" ", "Delete", new { id = item1.Intervento_Id }, new { @class = "fa fa-trash fa-2x text-danger " })
-                                    }
-                                </td>
-                            </tr>
+                            @Html.ActionLink(" ", "Edit", new { id = item1.Intervento_Id }, new { @class = "fa fa-pencil fa-2x" })
+                            @Html.ActionLink(" ", "Delete", new { id = item1.Intervento_Id }, new { @class = "fa fa-trash fa-2x text-danger " })
+                        }
+                    </td>
+                </tr>
 
                 }
 
-            }
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    }
 
 
 
 </div>
+
 @section Scripts{
 <script src="~/Scripts/jquery.filtertable.min.js"></script>
     <script type="text/javascript">

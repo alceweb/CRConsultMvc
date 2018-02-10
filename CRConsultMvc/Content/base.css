@@ -12,7 +12,7 @@ body {
     overflow: hidden;
     color: #57585c;
     color: var(--color-text);
-    background-color: #4cabef;
+    background-color: rgba(16, 22, 27, 0.57) !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -47,6 +47,12 @@ a:focus {
 	outline: none;
 }
 
+.intestazione{
+    position:absolute;
+    top:10px;
+    left:10px;
+    color:#fff;
+}
 .hidden {
 	position: absolute;
 	overflow: hidden;
@@ -254,8 +260,8 @@ main {
     user-select: none;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     grid-area: title;
-    font-size: 5vw;
-    font-weight: 400;
+    font-size: 6vw;
+    font-weight: 200;
 }
 
 .word span {
@@ -322,7 +328,7 @@ main {
 	position: fixed;
 	top: 0;
 	left: 0;
-    background-color:rgba(27, 25, 25, 0.88);
+    /*background-color:rgba(27, 25, 25, 0.88);*/
     height:100%;
 }
 

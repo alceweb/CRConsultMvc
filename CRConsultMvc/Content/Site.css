@@ -184,7 +184,7 @@ footer{
     text-shadow: 0px 0px 1px #fff;
 }
 .plug-assistenza{
-    /*position:fixed;*/
+    position:fixed;
     right:0;
     bottom:0;
     z-index:9000;
@@ -195,14 +195,14 @@ footer{
     .plug-assistenza i {
         z-index: 9000;
     }
-.plug-assistenza plug{
-	position: relative;
-    display: flex;
+.plug-assistenza .plug{
+	position: absolute;
+    color:#fff;
     flex-direction: column;
-    top:50%;
+    bottom:0;
     justify-content: center;
     flex-wrap: wrap;
-    margin: 0 0 0.25em 0;
+    /*margin: 0 0 0.25em 0;*/
     cursor: default;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -210,33 +210,45 @@ footer{
     -ms-user-select: none;
     user-select: none;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
-    grid-area: title;
+    /*grid-area: title;*/
     font-size:2em;
     text-align:center;
     z-index:9000;
 }
+    .plug-assistenza .plug p {
+        font-size: 3vw;
+    }
     .plug-assistenza img {
-        width:170px;
+        width:50%;
         transition: all ease 1s;
         border-radius:50%;
         border: solid #fff 3px;
-        margin-top:30px;
     }
+@media (max-width: 768px) {
+    .plug-assistenza img {
+        width: 70%;
+        transition: all ease 1s;
+        border-radius: 50%;
+        border: solid #fff 3px;
+        margin-top:10px;
+    }
+}
     .plug-assistenza img:hover {
         transition: all ease 1s;
         transform:scale(1.4);
         z-index:1;
     }
+    .hrl {
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0));
+    }
 
-
-.hrl {
-    border: 0;
-    height: 1px;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0));
-}
-
-.hr2 {
-    border: 0;
-    height: 1px;
-    background-image: linear-gradient(to left, rgba(255, 106, 0, 0), rgba(255, 106, 0, 0.8));
-}
+    .hr2 {
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to left, rgba(255, 106, 0, 0), rgba(255, 106, 0, 0.8));
+    }
+    .hrtop{
+        margin-bottom:0px;
+    }

@@ -50,4 +50,5 @@ namespace CRConsultMvc.Models
         public float? Gettone { get; set; }
         public IEnumerable<SelectListItem> RolesList { get; set; }
     }
+
 }

@@ -465,6 +465,9 @@
     <Content Include="Views\Interventis\IndexUsr.cshtml" />
     <Content Include="Views\Gettonis\IndexUsr.cshtml" />
     <Content Include="Views\Home\View.cshtml" />
+    <Content Include="Views\Home\FormContratto.cshtml" />
+    <Content Include="Views\Home\Riservata.cshtml" />
+    <Content Include="Views\Interventis\Riservata.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

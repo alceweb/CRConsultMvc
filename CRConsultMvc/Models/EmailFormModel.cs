@@ -38,4 +38,21 @@ namespace CRConsultMvc.Models
         [Required, Display(Name = "Privacy")]
         public bool Privacy { get; set; }
     }
+
+    public class EmailContratto
+    {
+
+        [Required, Display(Name = "Nome Cognome")]
+        public string Nome { get; set; }
+        public string Ditta { get; set; }
+        [Required, Display(Name = "Telefono")]
+        public string Telefono { get; set; }
+        [Required, Display(Name = "Email"), EmailAddress]
+        public string Email { get; set; }
+        [Required, Display(Name = "Note")]
+        [DataType(DataType.MultilineText)]
+        public string Note { get; set; }
+        [Required, Display(Name = "Privacy")]
+        public bool Privacy { get; set; }
+    }
 }

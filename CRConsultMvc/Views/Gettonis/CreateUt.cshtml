@@ -5,45 +5,59 @@
 }
 <div class="container">
 
-    <h2>Create</h2>
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            <h4>Gettoni</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.NGettoni, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.NGettoni, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.NGettoni, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Pagato, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.Pagato)
-                        @Html.ValidationMessageFor(model => model.Pagato, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
-            </div>
+    <h2 class="text-center">Aggiungi gettoni</h2>
+    <hr class="hrl" />
+    <div class="row">
+        <div class="col-md-4">
+            <p>L'aggiunta di gettoni <span class="text-danger">non comporta nessun impegno economico</span>, serve solo per comunicare al servizio assistenza che il cliente può aprire i ticket.</p>
+            <p>Aggiungendo i gettoni hai la possibilità di aprire un ticket. In ogni caso, se il tuo contratto è scaduto e non hai il rinnovo automatico, verrai contattato da un nostro incaricato per il rinnovo.</p>
+            <br/>
         </div>
-    }
+        <div class="col-md-4">
+            <div class="text-center">
 
-    <div>
-        @Html.ActionLink("Back to List", "Index")
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="btn-group-lg" id="NGettoni" data-toggle="buttons">
+
+
+                        <label class="btn btn-lg btn-primary active">
+                            @Html.RadioButtonFor(g => g.NGettoni, "10") 10
+                        </label>
+                        <label class="btn btn-primary">
+                            @Html.RadioButtonFor(g => g.NGettoni, "25") 25
+                        </label>
+                        <label class="btn btn-primary">
+                            @Html.RadioButtonFor(g => g.NGettoni, "50") 50
+                        </label>
+                        <label class="btn btn-primary">
+                            @Html.RadioButtonFor(g => g.NGettoni, "100") 100
+                        </label>
+                    </div>
+                    <h2>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        @Html.ValidationMessageFor(model => model.NGettoni, "", new { @class = "text-danger" })
+                        <input type="submit" id="btn1" class="btn btn-success" />
+                        @Html.ActionLink("Annulla", "IndexUt", "Interventis", null, new { @class = "btn btn-danger" })
+
+
+                    </h2>
+
+                }
+            </div>
+
+        </div>
+        <div class="col-md-4">
+
+        </div>
     </div>
+
 </div>
+@section Scripts{
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script>
+    </script>
+    }

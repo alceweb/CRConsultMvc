@@ -10,15 +10,16 @@
     {
         <h3>Hai ancora @ViewBag.GettoniR gettoni</h3>
         <div >
-            @Html.ActionLink("Richiedi intervento", "CreateUt", new {uid = ViewBag.Uid }, new { @class = "btn btn-primary" })
+            <a href="@Url.Action("CreateUt", "Interventis", new {uid = ViewBag.Uid })" class="btn btn-primary"><span class="badge">@ViewBag.InterventiCount</span> Apri un ticket</a>
         </div>
 
     }
     else
     {
-        <h3 class="text-danger">Non hai gettoni a disposizione</h3>
+        <h3 class="text-danger">Non hai più gettoni</h3>
         <h5>
-            @Html.ActionLink("Acquista gettoni", "CreateUt", "Gettonis")
+            Per aprire un ticket devi avere almeno un gettone - 
+            @Html.ActionLink("Aggiungi gettoni", "CreateUt", "Gettonis")
             <!-- Button trigger modal info gettoni -->
             <a href="#ModalInfo" data-toggle="modal">
                 <span class="fa fa-question-circle"></span>
@@ -31,7 +32,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title text-center" id="myModalLabel">Perchè devo acquistare gettoni?</h4>
+                            <h4 class="modal-title text-center" id="myModalLabel">Perchè devo aggiungere gettoni?</h4>
                         </div>
                         <div class="modal-body">
                             <h4 class="text-center">
@@ -39,7 +40,7 @@
                             </h4><hr class="hrl" />
                            <h4>Clienti senza contratto</h4>
                             <p>
-                                L'acquisto di gettoni è una proposta di acquisto, quindi <strong>non comporta nessun impegno economico.</strong>
+                                L'aggiunta di gettoni è una proposta di acquisto, quindi <strong>non comporta nessun impegno economico.</strong>
                             </p>
                             <p>
                                 Una volta acquistato il gettone (ne basta uno) hai la possibilità di esporre il tuo problema e di richiedere l'aiuto di un esperto.
@@ -107,16 +108,25 @@
 
             @foreach (var item in Model)
             {
-                <tr>
-                    <td class="text-danger">
+                var trint = "";
+                if (item.Chiuso == true)
+                {
+                    trint = "alert-danger";
+                }
+                else
+                {
+                    trint = "alert-success";
+                }
+                <tr class="@trint">
+                    <td>
                         @item.DataChiamata.ToString("dddd dd-MMM-yyyy")
                     </td>
-                   <td class="text-success">
-                       @if (item.DataIntervento != null)
-                       {
-                        <span>@item.DataIntervento.Value.ToString("dddd dd-MMM-yyyy")</span><span class="h4">@item.DataIntervento.Value.ToString("HH.mm")</span>
+                    <td>
+                        @if (item.DataIntervento != null)
+                        {
+                            <span>@item.DataIntervento.Value.ToString("dddd dd-MMM-yyyy")</span>
 
-                       }
+                        }
                     </td>
                     <td>
                         @Html.Raw(item.Descrizione)
@@ -131,10 +141,10 @@
                         @if (User.IsInRole("Admin"))
                         {
 
-                            @Html.ActionLink(" ", "Edit", null, new {@class= "fa fa-pencil fa-2x text-primary", id = item.Intervento_Id })
-                            @Html.ActionLink(" ", "Delete", null, new {@class="fa fa-trash fa-2x text-danger ", id = item.Intervento_Id })
+                            @Html.ActionLink(" ", "Edit", null, new { @class = "fa fa-pencil fa-2x text-primary", id = item.Intervento_Id })
+                            @Html.ActionLink(" ", "Delete", null, new { @class = "fa fa-trash fa-2x text-danger ", id = item.Intervento_Id })
                         }
-                   </td>
+                    </td>
                 </tr>
             }
         </tbody>
