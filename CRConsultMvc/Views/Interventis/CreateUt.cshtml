@@ -5,16 +5,22 @@
 }
 <div class="container">
     <div class="pull-left">
-        <div class="badge">
-            Hai ancora @ViewBag.GettoniR gettoni
+        <div class="row">
+            <div class="badge">
+                Hai ancora @ViewBag.GettoniR gettoni
+            </div>
+            <!-- Button trigger modal info gettoni -->
+            <a href="#ModalInfo" data-toggle="modal">
+                <span class="fa fa-question-circle"></span>
+            </a>
+
         </div>
-        <!-- Button trigger modal info gettoni -->
-        <a href="#ModalInfo" data-toggle="modal">
-            <span class="fa fa-question-circle"></span>
-        </a>
+        <div><br />
+            <a href="@Url.Action("Riservata", "Interventis")" class="btn btn-sm btn-primary">I tuoi interventi</a>
+
+        </div>
 
     </div>
-
 
     <h2 class="text-center">Apertura ticket a C.R.Consult</h2>
     <hr />

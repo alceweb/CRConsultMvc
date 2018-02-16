@@ -4,14 +4,33 @@
 }
 
 <div class="container">
-    <div class="well well-sm">
+    <div class="row well well-sm">
+        <div class="row">
+            <div class="col-md-2 col-xs-12">
+                <div class="well well-sm">
+                    <span>Ticket @ViewBag.InterventiCount  </span>
+                    <span class="fa fa-unlock text-success">@ViewBag.InterventiApertiCount  </span>
+                    <span class="fa fa-lock text-danger">@ViewBag.InterventiChiusiCount</span>
+                </div>
 
-        <h1 class="text-center"><span class="fa fa-user"></span>   @User.Identity.Name</h1>
-        <h2 class="text-center"><span class="fa fa-key"></span> Area riservata</h2>
-        <p class="lead">Nella tua area riservata puoi gestire le tue richieste di assistenza, la situazione gettoni, aprire un ticket, controllare gli interventi.</p>
-        <a href="@Url.Action("CreateUt", "Interventis")" class="btn btn-warning">Apri un ticket</a>
+            </div>
+            <div class="col-md-8 col-xs-12">
+                <h1 class="text-center"><span class="fa fa-user"></span>   @User.Identity.Name</h1>
+                <h2 class="text-center"><span class="fa fa-key"></span> Area riservata</h2>
+
+            </div>
+            <div col-md-2 col-xs-12>
+
+            </div>
+        </div>
+
+        <div>
+
+            <p class="lead">Nell'area riservata puoi gestire le tue richieste di assistenza, la situazione gettoni, aprire un ticket, controllare gli interventi, modificare la password di accesso ed il tuo profilo.</p>
+            <a href="@Url.Action("CreateUt", "Interventis")" class="btn btn-warning">Apri un ticket</a>
+            <a href="@Url.Action("CreateUt", "Gettonis")" class="btn btn-warning">Aggiungi gettoni</a>
+        </div>
     </div>
-
     <div>
 
         <!-- Nav tabs -->
@@ -23,10 +42,13 @@
 
         <!-- Tab panes -->
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade active" id="ticket">
+            <div role="tabpanel" class="tab-pane fade in active" id="ticket">
                 <table class="table table-hover">
                     <thead>
                         <tr>
+                            <th >
+                                Stato
+                            </th>
                             <th>
                                 Data chiamata
                             </th>
@@ -38,9 +60,6 @@
                             </th>
                             <th class="text-right">
                                 Gettoni usati<br />
-                            </th>
-                            <th class="text-right">
-                                Stato
                             </th>
                             <th></th>
                         </tr>
@@ -63,6 +82,9 @@
                                 close = "fa fa-unlock-alt fa-2x";
                             }
                             <tr class="@trint">
+                                <td >
+                                    <span class="@close"></span>
+                                </td>
                                 <td>
 
                                     @item.DataChiamata.ToString("dddd dd-MMM-yyyy")
@@ -75,13 +97,19 @@
                                     }
                                 </td>
                                 <td>
+                                    @if (!String.IsNullOrEmpty(item.Intervento))
+                                    {
+                                        <a class="fa fa-arrow-down pull-left fa-2x" role="button" data-toggle="collapse" href="#@item.Intervento_Id" aria-expanded="false" aria-controls="@item.Intervento_Id"></a>
+                                    }
                                     @Html.Raw(item.Descrizione)
+                                    <div class="collapse" id="@item.Intervento_Id">
+                                        <div class="well">
+                                            @Html.Raw(item.Intervento)
+                                        </div>
+                                    </div>
                                 </td>
                                 <td class="text-right">
                                     @item.NGettoni
-                                </td>
-                                <td class="text-right">
-                                    <span class="@close"></span>
                                 </td>
                                 <td>
                                     @if (User.IsInRole("Admin"))

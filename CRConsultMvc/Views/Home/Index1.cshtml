@@ -6,9 +6,9 @@
 
     <div class="row">
         <div class="col col-md-4 text-center">
-            <h4>
-                Networking
-            </h4>
+            <h1 class="text-center">
+                NETWORKING
+            </h1>
             <div class="thumbnail">
                 <a href="/Home/Networking"><img class="imgHome img-circle" src="~/Content/Images/NetWork500.jpg" /></a>
                 <div class="caption" id="caption-half-down">
@@ -43,7 +43,7 @@
 
         </div>
         <div class="col col-md-4">
-            <h4 class="text-center">Web App</h4>
+            <h1 class="text-center">WEB APP</h1>
             <div class="thumbnail">
                 <a href="/Home/WebPage"><img class="imgHome img-circle" src="~/Content/Images/WebApp.jpg" /></a>
                 <div class="caption" id="caption-half-down">
@@ -80,36 +80,38 @@
             </div>
         </div>
         <div class="col col-md-4">
-            <h4 class="text-center">Assistenza</h4>
-            <div class="thumbnail">
-                <a href="/Home/Assistenza"><img class="imgHome img-circle" src="~/Content/Images/Assistenza500.jpg" /></a>
-                <div class="caption" id="caption-half-down">
-                    <h4>Aziende</h4>
-                    <p>On Site, Remote assistance, a contratto</p>
-                    <h4>Privati</h4>
-                    <p>Problem solving, a chiamata</p>
-                </div>
-                <div class="caption" id="caption-half-up">
-                    <div class="row">
-                        <div class="col col-sm-3">
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalAss">
-                                Contattaci
-                            </button>
-                        </div>
-                        <div class="col col-sm-6">
-                            <img class="img-circle imgUp" src="~/Content/Images/Assistenza200x200.jpg" />
+                <h1 class="text-center">ASSISTENZA</h1>
+                <div class="thumbnail">
+                    <a href="/Home/Assistenza">
+                        <img class="imgHome img-circle" src="~/Content/Images/Assistenza500.jpg" />
+                    </a>
+                    <div class="caption" id="caption-half-down">
+                        <h4>Aziende</h4>
+                        <p>On Site, Remote assistance, a contratto</p>
+                        <h4>Privati</h4>
+                        <p>Problem solving, a chiamata</p>
+                    </div>
+                    <div class="caption" id="caption-half-up">
+                        <div class="row">
+                            <div class="col col-sm-3">
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalAss">
+                                    Contattaci
+                                </button>
+                            </div>
+                            <div class="col col-sm-6">
+                                <img class="img-circle imgUp" src="~/Content/Images/Assistenza200x200.jpg" />
 
-                        </div>
-                        <div class="col col-sm-3">
-                            <a class="btn btn-primary" href="/Home/Assistenza">
-                                altro...
-                            </a>
+                            </div>
+                            <div class="col col-sm-3">
+                                <a class="btn btn-primary" href="/Home/Assistenza">
+                                    altro...
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-            </div>
-        </div>
+                </div>
+</div>
     </div>
     <!-- Modal Networking-->
     <div class="modal fade" id="ModalNet" tabindex="-1" role="dialog" aria-labelledby="Contatto Networking">
@@ -137,7 +139,7 @@
                         <div class="form-group">
                             @Html.LabelFor(m => m.Ditta, new { @class = "col-sm-2 control-label" })
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(m => m.Ditta, new { @class = "form-control", placeholder = "Intestazion ditta", required = "required" })
+                                @Html.TextBoxFor(m => m.Ditta, new { @class = "form-control", placeholder = "Intestazion ditta - Facoltativo"})
                                 @Html.ValidationMessageFor(m => m.Ditta, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -204,7 +206,7 @@
                         <div class="form-group">
                             @Html.LabelFor(m => m.Ditta, new { @class = "col-sm-2 control-label" })
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(m => m.Ditta, new { @class = "form-control", placeholder = "Intestazion ditta", required = "required" })
+                                @Html.TextBoxFor(m => m.Ditta, new { @class = "form-control", placeholder = "Intestazion ditta - Facoltativo" })
                                 @Html.ValidationMessageFor(m => m.Ditta, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -271,7 +273,7 @@
                         <div class="form-group">
                             @Html.LabelFor(m => m.Ditta, new { @class = "col-sm-2 control-label" })
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(m => m.Ditta, new { @class = "form-control", placeholder = "Intestazion ditta", required = "required" })
+                                @Html.TextBoxFor(m => m.Ditta, new { @class = "form-control", placeholder = "Intestazion ditta - Facoltativo" })
                                 @Html.ValidationMessageFor(m => m.Ditta, "", new { @class = "text-danger" })
                             </div>
                         </div>

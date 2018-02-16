@@ -64,8 +64,10 @@ namespace CRConsultMvc.Models
         public DateTime? DataIntervento { get; set; }
         [Display(Name ="Numero gettoni")]
         public int NGettoni { get; set; }
-        [Display(Name ="Descrizione intervento")]
+        [Display(Name ="Motivo chiamata")]
         public string Descrizione { get; set; }
+        [Display(Name ="Descrizione intervento")]
+        public string Intervento { get; set; }
         [Display(Name ="Chiuso")]
         public bool Chiuso { get; set; }
 

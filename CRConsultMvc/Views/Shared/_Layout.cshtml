@@ -10,6 +10,9 @@
  </head>
 <body>
     <div class="navbar navbar-default navbar-fixed-top">
+        <a href="@Url.Action("Index1", "Home")">
+            <img class="imgLogo" alt="Logo" src="~/Content/Images/LogoAC.png" />
+        </a>
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -67,12 +70,6 @@
       </ul>
    </div>
     
-        <div class="row">
-            <a class="navbar-brand" href="/Home/Index1">
-                <img class="imgLogo" alt="Logo" src="~/Content/Images/LogoAC.png" />
-                <span class="textLogo">Information Technology - Web Developer</span>
-            </a>
-        </div><hr class="hrtop" />
         @RenderBody()
     <footer>
         <div class="container">

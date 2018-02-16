@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity.Owin;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Net.Mail;
+using System.Web.Helpers;
 
 
 namespace CRConsultMvc.Controllers
@@ -58,7 +59,9 @@ namespace CRConsultMvc.Controllers
             var gettoni = db.Gettonis.Where(u => u.Id == uid).ToList();
             ViewBag.Interventi = interventi;
             ViewBag.Gettoni = gettoni;
-            ViewBag.InteventiCount = interventi.Count();
+            ViewBag.InterventiCount = interventi.Count();
+            ViewBag.InterventiChiusiCount = interventi.Where(c => c.Chiuso == true).Count();
+            ViewBag.InterventiApertiCount = interventi.Where(c => c.Chiuso == false).Count();
             ViewBag.GettoniCount = gettoni.Count();
             ViewBag.User = user;
             ViewBag.Uid = uid;
@@ -111,8 +114,11 @@ namespace CRConsultMvc.Controllers
         // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Intervento_Id,Id,DataChiamata,DataIntervento,NGettoni,Descrizione,Chiuso")] Interventi interventi)
+        public ActionResult Create([Bind(Include = "Intervento_Id,Id,DataChiamata,DataIntervento,NGettoni,Chiuso", Exclude ="Descrizione,Intervento")] Interventi interventi)
         {
+            FormCollection collection = new FormCollection(Request.Unvalidated().Form);
+            interventi.Descrizione = collection["Descrizione"];
+            interventi.Intervento = collection["Intervento"];
             if (ModelState.IsValid)
             {
                 db.Interventis.Add(interventi);
@@ -134,8 +140,10 @@ namespace CRConsultMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateUt([Bind(Include = "Intervento_Id,DataChiamata,DataIntervento,NGettoni,Descrizione,Chiuso")] Interventi interventi)
+        public async Task<ActionResult> CreateUt([Bind(Include = "Intervento_Id,DataChiamata,DataIntervento,NGettoni,Chiuso", Exclude = "Descrizione")] Interventi interventi)
         {
+            FormCollection collection = new FormCollection(Request.Unvalidated().Form);
+            interventi.Descrizione = collection["Descrizione"];
             if (ModelState.IsValid)
             {
                 var uid = User.Identity.GetUserId();
@@ -146,21 +154,21 @@ namespace CRConsultMvc.Controllers
                 db.Interventis.Add(interventi);
                 db.SaveChanges();
                 //Invio la mail a crconsult
-                MailMessage message = new MailMessage("webservice@cr-consult.it",
-                    umail,
-                    "Abbiamo ricevuto la tua richiesta",
-                    "Gentile cliente, il giorno " + DateTime.Now.ToString("dddd dd MMM yyyy") + " alle " + DateTime.Now.ToString("HH.mm") + " abbiamo registrato il tuo tiicket N. CRC-" + interventi.Intervento_Id + ": <hr/>" +
-                    "Data: <strong>" + DateTime.Now + "</strong><br/>" +
-                    interventi.Descrizione +
-                    "</strong><hr/>Verrai contattato al più presto dal tuo specialista di riferimento<br>"
-                    );
-                message.IsBodyHtml = true;
-                MailAddress bcc = new MailAddress("cesare@cr-consult.eu");
-                message.Bcc.Add(bcc);
-                using (var smtp = new SmtpClient())
-                {
-                    await smtp.SendMailAsync(message);
-                }
+                //MailMessage message = new MailMessage("webservice@cr-consult.it",
+                //    umail,
+                //    "Abbiamo ricevuto la tua richiesta",
+                //    "Gentile cliente, il giorno " + DateTime.Now.ToString("dddd dd MMM yyyy") + " alle " + DateTime.Now.ToString("HH.mm") + " abbiamo registrato il tuo tiicket N. CRC-" + interventi.Intervento_Id + ": <hr/>" +
+                //    "Data: <strong>" + DateTime.Now + "</strong><br/>" +
+                //    interventi.Descrizione +
+                //    "</strong><hr/>Verrai contattato al più presto dal tuo specialista di riferimento<br>"
+                //    );
+                //message.IsBodyHtml = true;
+                //MailAddress bcc = new MailAddress("cesare@cr-consult.eu");
+                //message.Bcc.Add(bcc);
+                //using (var smtp = new SmtpClient())
+                //{
+                //    await smtp.SendMailAsync(message);
+                //}
 
                 return RedirectToAction("IndexUt", new {uid = uid });
             }
@@ -188,8 +196,11 @@ namespace CRConsultMvc.Controllers
         // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Intervento_Id,Id,DataChiamata,DataIntervento,NGettoni,Descrizione,Chiuso")] Interventi interventi)
+        public ActionResult Edit([Bind(Include = "Intervento_Id,Id,DataChiamata,DataIntervento,NGettoni,Descrizione,Chiuso", Exclude = "Descrizione,Intervento")] Interventi interventi)
         {
+            FormCollection collection = new FormCollection(Request.Unvalidated().Form);
+            interventi.Descrizione = collection["Descrizione"];
+            interventi.Intervento = collection["Intervento"];
             if (ModelState.IsValid)
             {
                 

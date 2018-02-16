@@ -19,12 +19,10 @@
             trint = "alert-success";
             close = "fa fa-unlock-alt fa-2x text-success";
         }
-        <span class="@close"></span>
-
-
         <table class="table table-hover tablef">
             <thead>
                 <tr>
+                    <th></th>
                     <th>
                     </th>
                     <th>
@@ -49,7 +47,9 @@
                 @foreach (var item1 in item.OrderByDescending(d=>d.DataChiamata))
                 {
                 <tr class="@trint">
-                    <td>@item1.Nome.Nome</td>
+                    <td><span class="@close"></span>
+                    </td>
+                    <td>@item1.Nome.UserName</td>
                     <td>
                         @item1.DataChiamata.ToString("dd-MMM-yyyy")
                     </td>
@@ -65,13 +65,21 @@
                         @Html.DisplayFor(modelItem => item1.NGettoni)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item1.Descrizione)
+                        @if (!String.IsNullOrEmpty(item1.Intervento))
+                        {
+                            <a class="fa fa-arrow-down pull-left fa-2x" role="button" data-toggle="collapse" href="#@item1.Intervento_Id" aria-expanded="false" aria-controls="@item1.Intervento_Id"></a>
+                        }
+                        @Html.Raw(item1.Descrizione)
+                        <div class="collapse" id="@item1.Intervento_Id">
+                            <div class="well">
+                                @Html.Raw(item1.Intervento)
+                            </div>
+                        </div>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item1.Chiuso)
                     </td>
                     <td>
-                        <span class="@close"></span>
                         @if (User.IsInRole("Admin"))
                         {
 

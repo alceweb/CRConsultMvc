@@ -11,16 +11,16 @@
 
     </div>
     <div class="col-sm-6 text-center">
-        <h3 >Problemi con l'informatica?</h3>
+        <h3 class="alert alert-info">Privati/nuovi clienti</h3>
         <a role="button" data-toggle="modal" href="#modalass" aria-expanded="false" aria-controls="modalass">
-            <h2 class="fa fa-street-view fa-3x"> Contatta un esperto</h2>
+            <h3><span class="fa fa-street-view fa-2x"></span> Contatta un esperto</h3>
         </a>
         <hr class="hrl" />
-        <h3 >Sei già nostro cliente?</h3>
-        <a href="@Url.Action("Riservata", "Interventis")"><h2 class="fa fa-user fa-3x"> Entra nell'area riservata</h2></a>
+        <h3 class="alert alert-info">Clienti con contratto</h3>
+        <a href="@Url.Action("Riservata", "Interventis")"><h3 ><span class="fa fa-user fa-2x"></span> Entra nell'area riservata</h3></a>
         <hr class="hrl" />
-        <h3>Vuoi attivare un contratto?</h3>
-        <a href="@Url.Action("FormContratto", "Home")"><h2 class="fa fa-paste fa-3x"> Chiedi informazioni</h2></a>
+        <h3 class="alert alert-info">Vuoi attivare un contratto?</h3>
+        <a href="@Url.Action("FormContratto", "Home")"><h3><span class="fa fa-paste fa-2x"></span> Chiedi informazioni</h3></a>
 
         <!-- Modal -->
         <div class="modal fade" id="modalass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -32,9 +32,9 @@
                     </div>
                     <div class="modal-body">
                         <div>
-                            Compilando questa form verrai messo in contatto con un esperto.<br/>
-                            Lascia i tuoi dati (mail, cellulare) e verrai richiamato da un nostro incaricato.<br/>
-                            La richiesta di contatto non comporta nessun impegno economico. I dati inseriti verranno trattati secondo la <a target="_blank" href="@Url.Action("Privacy", "Home")">Privacy Policy</a>
+                            Lascia i tuoi dati e verrai contattato da un nostro incaricato.<br/>
+                            La richiesta di contatto è <span class="text-danger">completamente gratuita.</span>
+                            Inviando la form <span class="text-danger">non prendi nessun impegno economico</span>, la tua richiesta verrà presa in carico da uno specialista e i dati inseriti verranno trattati secondo la <a target="_blank" href="@Url.Action("Privacy", "Home")">Privacy Policy</a>
                         </div>
                         @using (Html.BeginForm("FormEsperto", "Home", null, FormMethod.Post, new { @class = "form-horizontal" }))
             {
@@ -103,26 +103,28 @@
                 <img class="imgHome img-circle" src="~/Content/Images/Assistenza1-500.jpg" />
             </div>
             <div class="div1">
-                <h3><a href="/Account/Login"><span class="fa fa-eercast"> A contratto</span></a></h3>
+                <h3><a href="#nogo"><span class="fa fa-eercast"> A contratto</span></a></h3>
                 <ul>
                     <li>Annuale</li>
                     <li>No diritto di chiamata</li>
                     <li>Monte ore personalizzati</li>
                     <li>Tempi di intervento server</li>
+                    <li>Remote access</li>
                 </ul>
-                <h3><a href="/Account/Login"><span class="fa fa-phone-square"> A chiamata</span></a></h3>
+                <h3><a href="#nogo"><span class="fa fa-phone-square"> A chiamata</span></a></h3>
                 <ul>
                     <li>On Site</li>
                     <li>Presso laboratorio</li>
+                    <li>Remote access</li>
                 </ul>
-                <h3><a href="/Account/Login"><span class="fa fa-calendar-check-o"> Programmata</span></a></h3>
+                <h3><a href="#nogo"><span class="fa fa-calendar-check-o"> Programmata</span></a></h3>
                 <ul>
                     <li>Fault prevention</li>
                     <li>Backup strutturati</li>
                     <li>Cleaning</li>
                     <li>Manutenzione ordinaria</li>
                 </ul>
-                <h3><a href="/Account/Login"><span class="fa fa-object-group"> Global</span></a></h3>
+                <h3><a href="#nogo"><span class="fa fa-object-group"> Global</span></a></h3>
                 <ul>
                     <li>Data Recovery</li>
                     <li>Analisi installato</li>
@@ -138,7 +140,7 @@
                 <img class="imgHome img-circle" src="~/Content/Images/Assistenza2-500.jpg" />
             </div>
             <div class="div1">
-                <h3><a href="/Account/Login"><span class="fa fa-car"> Off Site</span></a></h3>
+                <h3><a href="#nogo"><span class="fa fa-car"> Off Site</span></a></h3>
                 <ul>
                     <li>System recovery</li>
                     <li>Recupero dati</li>
@@ -153,7 +155,7 @@
                 <img class="imgHome img-circle" src="~/Content/Images/Assistenza3-500.jpg" />
             </div>
             <div class="div1">
-                <h3><a href="/Account/Login"><span class="fa fa-hdd-o">Hardware</span></a></h3>
+                <h3><a href="#nogo"><span class="fa fa-hdd-o">Hardware</span></a></h3>
                 <ul>
                     <li>Server</li>
                     <li>PC</li>
@@ -161,7 +163,7 @@
                     <li>Ultra Notebook</li>
                     <li>Stampanti</li>
                 </ul>
-                <h3><a href="/Account/Login"><span class="fa fa-spinner">Software</span></a></h3>
+                <h3><a href="#nogo"><span class="fa fa-spinner">Software</span></a></h3>
                 <ul>
                     <li>Microsoft S.O.</li>
                     <li>Evolution</li>
