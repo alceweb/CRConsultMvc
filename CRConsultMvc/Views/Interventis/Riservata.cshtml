@@ -8,15 +8,15 @@
         <div class="row">
             <div class="col-md-2 col-xs-12">
                 <div class="well well-sm">
-                    <span>Ticket @ViewBag.InterventiCount  </span>
-                    <span class="fa fa-unlock text-success">@ViewBag.InterventiApertiCount  </span>
-                    <span class="fa fa-lock text-danger">@ViewBag.InterventiChiusiCount</span>
+                    <span>Ticket </span><strong>@ViewBag.InterventiCount  </strong>
+                    <span class="fa fa-unlock text-danger">@ViewBag.InterventiApertiCount   </span>
+                    <span class="fa fa-lock text-success">@ViewBag.InterventiChiusiCount</span>
+                    <div>Gettoni <strong>@ViewBag.GettoniCount</strong></div>
                 </div>
 
             </div>
             <div class="col-md-8 col-xs-12">
-                <h1 class="text-center"><span class="fa fa-user"></span>   @User.Identity.Name</h1>
-                <h2 class="text-center"><span class="fa fa-key"></span> Area riservata</h2>
+                <h1 class="text-center"><span class="fa fa-key"></span> Area riservata</h1>
 
             </div>
             <div col-md-2 col-xs-12>
@@ -25,30 +25,37 @@
         </div>
 
         <div>
-
             <p class="lead">Nell'area riservata puoi gestire le tue richieste di assistenza, la situazione gettoni, aprire un ticket, controllare gli interventi, modificare la password di accesso ed il tuo profilo.</p>
-            <a href="@Url.Action("CreateUt", "Interventis")" class="btn btn-warning">Apri un ticket</a>
-            <a href="@Url.Action("CreateUt", "Gettonis")" class="btn btn-warning">Aggiungi gettoni</a>
+            <a href="@Url.Action("CreateUt", "Interventis")" class="btn btn-crc">Apri un ticket</a>
+            <a href="@Url.Action("CreateUt", "Gettonis")" class="btn btn-crc">Aggiungi gettoni</a>
+            <span class="well well-sm pull-right text-success">Hai ancora a disposizione <strong>@ViewBag.GettoniCount</strong> gettoni</span>
         </div>
     </div>
     <div>
 
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#ticket" aria-controls="ticket" role="tab" data-toggle="tab"><h3>Ticket</h3></a></li>
-            <li role="presentation"><a href="#gettoni" aria-controls="gettoni" role="tab" data-toggle="tab"><h3>Gettoni</h3></a></li>
-            <li role="presentation"><a href="#profilo" aria-controls="profilo" role="tab" data-toggle="tab"><h3>Profilo</h3></a></li>
+            <li role="presentation" class="active"><a href="#ticket" aria-controls="ticket" role="tab" data-toggle="tab"><h3><span class="fa fa-ticket"></span> Ticket</h3></a></li>
+            <li role="presentation"><a href="#gettoni" aria-controls="gettoni" role="tab" data-toggle="tab"><h3><span class="fa fa-dot-circle-o"></span> Gettoni</h3></a></li>
+            <li role="presentation"><a href="#profilo" aria-controls="profilo" role="tab" data-toggle="tab"><h3><span class="fa fa-user-circle-o"></span>  Profilo</h3></a></li>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="ticket">
-                <table class="table table-hover">
+                <table class="table table-hover tablef">
                     <thead>
                         <tr>
                             <th >
                                 Stato
                             </th>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <th>
+
+                                </th>
+
+                            }
                             <th>
                                 Data chiamata
                             </th>
@@ -59,7 +66,7 @@
                                 Descrizione
                             </th>
                             <th class="text-right">
-                                Gettoni usati<br />
+                                Gettoni usati <span class="badge">@ViewBag.GettoniUsati</span><br />
                             </th>
                             <th></th>
                         </tr>
@@ -73,18 +80,24 @@
                             var close = "";
                             if (item.Chiuso == true)
                             {
-                                trint = "alert-danger";
+                                trint = "alert-success";
                                 close = "fa fa-lock fa-2x";
                             }
                             else
                             {
-                                trint = "alert-success";
+                                trint = "alert-danger";
                                 close = "fa fa-unlock-alt fa-2x";
                             }
                             <tr class="@trint">
                                 <td >
                                     <span class="@close"></span>
                                 </td>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <td>
+                                        @item.Nome.Ditta
+                                    </td>
+                                }
                                 <td>
 
                                     @item.DataChiamata.ToString("dddd dd-MMM-yyyy")
@@ -99,7 +112,7 @@
                                 <td>
                                     @if (!String.IsNullOrEmpty(item.Intervento))
                                     {
-                                        <a class="fa fa-arrow-down pull-left fa-2x" role="button" data-toggle="collapse" href="#@item.Intervento_Id" aria-expanded="false" aria-controls="@item.Intervento_Id"></a>
+                                        <a class="fa fa-arrow-circle-down pull-left fa-2x adown text-crc" role="button" data-toggle="collapse" href="#@item.Intervento_Id" aria-expanded="false" aria-controls="@item.Intervento_Id"></a>
                                     }
                                     @Html.Raw(item.Descrizione)
                                     <div class="collapse" id="@item.Intervento_Id">
@@ -115,8 +128,8 @@
                                     @if (User.IsInRole("Admin"))
                                     {
 
-                                        @Html.ActionLink(" ", "Edit", null, new { @class = "fa fa-pencil fa-2x text-primary", id = item.Intervento_Id })
-                                        @Html.ActionLink(" ", "Delete", null, new { @class = "fa fa-trash fa-2x text-danger ", id = item.Intervento_Id })
+                                        @Html.ActionLink(" ", "Edit", new { id = item.Intervento_Id}, new {@class = "fa fa-pencil fa-2x text-primary"})
+                                        @Html.ActionLink(" ", "Delete", new { id = item.Intervento_Id }, new { @class = "fa fa-trash fa-2x text-danger "})
                                     }
                                 </td>
                             </tr>
@@ -126,21 +139,21 @@
                     </table>
             </div>
             <div role="tabpanel" class="tab-pane" id="gettoni">
-                <table class="table table-hover">
+                <table class="table table-hover tablef">
                     <thead>
 
                         <tr>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <th>
+                                    
+                                </th>
+                            }
                             <th>
-                                Data
+                                Data attivazione
                             </th>
                             <th>
-                                N. Gettoni
-                            </th>
-                            <th>
-                                Totale
-                            </th>
-                            <th>
-                                Pagato
+                                N. Gettoni <span class="badge">@ViewBag.GettoniAttivati</span>
                             </th>
                             <th></th>
                         </tr>
@@ -150,17 +163,17 @@
                         @foreach (var item in ViewBag.Gettoni)
             {
                             <tr>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <td>
+                                        @item.Nome.Ditta
+                                    </td>
+                                }
                                 <td>
                                     @item.Data
                                 </td>
                                 <td>
                                     @item.NGettoni
-                                </td>
-                                <td>
-                                    @item.Totale
-                                </td>
-                                <td>
-                                    @item.Pagato
                                 </td>
                                 <td>
                                 </td>
@@ -217,4 +230,17 @@
     </div>
 </div>
 @section Scripts{
+    <script src="~/Scripts/jquery.filtertable.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.tablef').filterTable();
+        });
+        $('.adown').click(
+            function () {
+                $(this).toggleClass("fa-arrow-up fa-arrow-circle-down");
+                $(this).toggleClass("text-crc text-warning");
+            }
+        );
+
+    </script>
     }

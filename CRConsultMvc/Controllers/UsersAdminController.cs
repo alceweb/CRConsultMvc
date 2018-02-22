@@ -246,6 +246,7 @@ namespace CRConsultMvc.Controllers
             {
                 return HttpNotFound();
             }
+            var userRoles = await UserManager.GetRolesAsync(user.Id);
 
             return View(new EditUserViewModel()
             {
@@ -261,6 +262,12 @@ namespace CRConsultMvc.Controllers
                 Ditta = user.Ditta,
                 PartitaIva = user.PartitaIva,
                 CodiceFiscale = user.CodiceFiscale,
+                RolesList = RoleManager.Roles.ToList().Select(x => new SelectListItem()
+                {
+                    Selected = userRoles.Contains(x.Name),
+                    Text = x.Name,
+                    Value = x.Name
+                })
             });
         }
 

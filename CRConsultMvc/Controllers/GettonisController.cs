@@ -47,8 +47,14 @@ namespace CRConsultMvc.Controllers
             return View(db.Gettonis.ToList());
         }
 
-        public ActionResult IndexUsr(string uid)
+        public async Task<ActionResult> IndexUsr(string uid)
         {
+            var utente = await UserManager.FindByIdAsync(uid);
+            int get = db.Gettonis.Where(g => g.Id == uid).Sum(g => (int?)g.NGettoni).GetValueOrDefault();
+            int tic = db.Interventis.Where(g => g.Id == uid).Sum(g => (int?)g.NGettoni).GetValueOrDefault();
+            ViewBag.Utente = utente.Ditta;
+            ViewBag.GettoniCount = get - tic;
+            ViewBag.Uid = uid;
             var gettoni = db.Gettonis.Include(u=>u.Nome).Where(g => g.Id == uid).ToList();
             return View(gettoni);
         }
@@ -119,7 +125,7 @@ namespace CRConsultMvc.Controllers
                 gettoni.Totale = gett * gettoni.NGettoni;
                 db.Gettonis.Add(gettoni);
                 db.SaveChanges();
-                return RedirectToAction("IndexUt", "Interventis");
+                return RedirectToAction("Riservata", "Interventis");
             }
 
             return View(gettoni);
@@ -151,7 +157,7 @@ namespace CRConsultMvc.Controllers
             {
                 db.Entry(gettoni).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexUsr", new {uid = gettoni.Id });
             }
             return View(gettoni);
         }

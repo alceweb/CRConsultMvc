@@ -67,7 +67,7 @@
                     <td>
                         @if (!String.IsNullOrEmpty(item1.Intervento))
                         {
-                            <a class="fa fa-arrow-down pull-left fa-2x" role="button" data-toggle="collapse" href="#@item1.Intervento_Id" aria-expanded="false" aria-controls="@item1.Intervento_Id"></a>
+                            <a class="fa fa-arrow-circle-down text-crc fa-2x adown" role="button" data-toggle="collapse" href="#@item1.Intervento_Id" aria-expanded="false" aria-controls="@item1.Intervento_Id"></a>
                         }
                         @Html.Raw(item1.Descrizione)
                         <div class="collapse" id="@item1.Intervento_Id">
@@ -105,6 +105,12 @@
         $(document).ready(function () {
             $('.tablef').filterTable();
         });
-    </script>
+        $('.adown').click(
+            function () {
+                $(this).toggleClass("fa-arrow-up fa-arrow-circle-down");
+                $(this).toggleClass("text-crc text-warning");
+            }
+        );
+   </script>
 
-    }
+}

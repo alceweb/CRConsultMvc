@@ -55,20 +55,38 @@ namespace CRConsultMvc.Controllers
         {
             var uid = User.Identity.GetUserId();
             var user = await UserManager.FindByIdAsync(uid);
-            var interventi = db.Interventis.Where(u => u.Id == uid).OrderBy(u=>u.Chiuso).ThenByDescending(u=>u.DataChiamata).ToList();
-            var gettoni = db.Gettonis.Where(u => u.Id == uid).ToList();
+            var interventi = new List<Interventi>();
+            var gettoni = new List<Gettoni>();
+            if (User.IsInRole("Admin"))
+            {
+                interventi = db.Interventis.OrderBy(u => u.Chiuso).ThenByDescending(u => u.DataChiamata).ToList();
+                gettoni = db.Gettonis.ToList();
+            }
+            else
+            {
+                interventi = db.Interventis.Where(u => u.Id == uid).OrderBy(u => u.Chiuso).ThenByDescending(u => u.DataChiamata).ToList();
+                gettoni = db.Gettonis.Where(u => u.Id == uid).ToList();
+           }
+            int get = db.Gettonis.Where(g => g.Id == uid).Sum(g => (int?)g.NGettoni).GetValueOrDefault();
+            int tic = db.Interventis.Where(g => g.Id == uid).Sum(g => (int?)g.NGettoni).GetValueOrDefault();
+            ViewBag.GettoniCount = get - tic;
             ViewBag.Interventi = interventi;
             ViewBag.Gettoni = gettoni;
             ViewBag.InterventiCount = interventi.Count();
             ViewBag.InterventiChiusiCount = interventi.Where(c => c.Chiuso == true).Count();
             ViewBag.InterventiApertiCount = interventi.Where(c => c.Chiuso == false).Count();
-            ViewBag.GettoniCount = gettoni.Count();
             ViewBag.User = user;
             ViewBag.Uid = uid;
             return View();
         }
-        public ActionResult IndexUsr(string uid)
+        public async Task<ActionResult> IndexUsr(string uid)
         {
+            var utente = await UserManager.FindByIdAsync(uid);
+            int get = db.Gettonis.Where(g => g.Id == uid).Sum(g => (int?)g.NGettoni).GetValueOrDefault();
+            int tic = db.Interventis.Where(g => g.Id == uid).Sum(g => (int?)g.NGettoni).GetValueOrDefault();
+            ViewBag.Utente = utente.Ditta;
+            ViewBag.GettoniCount = get - tic;
+            ViewBag.Uid = uid;
             var interventi = db.Interventis.Where(u => u.Id == uid).ToList(); ;
             return View(interventi);
         }
@@ -123,7 +141,7 @@ namespace CRConsultMvc.Controllers
             {
                 db.Interventis.Add(interventi);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Riservata");
             }
 
             return View(interventi);
@@ -148,7 +166,7 @@ namespace CRConsultMvc.Controllers
             {
                 var uid = User.Identity.GetUserId();
                 interventi.Id = uid;
-                var user = UserManager.FindById(User.Identity.GetUserId());
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
                 var umail = user.Email;
                 interventi.DataChiamata = DateTime.Now;
                 db.Interventis.Add(interventi);
@@ -176,6 +194,13 @@ namespace CRConsultMvc.Controllers
             return View(interventi);
         }
 
+
+        public async Task<ActionResult> CreateUsr(string id)
+        {
+            var user = await UserManager.FindByIdAsync(id);
+            ViewBag.User = user;
+            return View();
+        }
          // GET: Interventis/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -206,7 +231,7 @@ namespace CRConsultMvc.Controllers
                 
                 db.Entry(interventi).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Riservata");
             }
             return View(interventi);
         }
@@ -234,7 +259,7 @@ namespace CRConsultMvc.Controllers
             Interventi interventi = db.Interventis.Find(id);
             db.Interventis.Remove(interventi);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Riservata");
         }
 
         protected override void Dispose(bool disposing)

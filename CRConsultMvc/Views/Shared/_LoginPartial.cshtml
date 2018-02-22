@@ -7,9 +7,12 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink(User.Identity.GetUserName(), "IndexUs", "UsersAdmin", routeValues: null, htmlAttributes: new { title = "Manage" })
+            <a href="@Url.Action("Riservata", "Interventis")"><span class="fa fa-home fa-2x text-crc"></span></a>
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Disconnetti</a></li>
+        <li>
+            <a href="@Url.Action("IndexUs", "UsersAdmin")" title="Profilo"><span class="fa fa-user fa-2x text-crc"> @User.Identity.GetUserName()</span></a>
+       </li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()" title="Disconnetti"><span class="fa fa-sign-out fa-2x text-danger"></span></a></li>
     </ul>
     }
 }
@@ -18,7 +21,7 @@ else
     <ul class="nav navbar-nav navbar-right">
        @* <li>@Html.ActionLink("Registrazione", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
     <li>@Html.ActionLink("Accedi", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
-        <li><h2><a href="/Account/Login"><span class="glyphicon glyphicon-user"></span></a></h2></li>
+        <li><h2><a href="/Account/Login" title="Login"><span class="fa fa-sign-in"></span></a></h2></li>
         <li><a></a></li>
         <li><h2><a href="http://portal.office.com"><span class="glyphicon glyphicon-globe"></span></a></h2></li>
     </ul>

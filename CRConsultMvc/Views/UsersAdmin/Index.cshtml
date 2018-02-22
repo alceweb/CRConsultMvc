@@ -40,8 +40,8 @@
         {
         <tr>
             <td>
-                <a href="@Url.Action("IndexUsr", "Interventis", new {uid = item.Id})" class="fa fa-cogs fa-2x text-warning" title="Interventi/Tickets"></a>
-                <a href="@Url.Action("IndexUsr", "Gettonis", new {uid = item.Id})" class="fa fa-ticket fa-2x text-danger" title="Gettoni"></a>
+                <a href="@Url.Action("IndexUsr", "Interventis", new {uid = item.Id})" class="fa fa-ticket fa-2x text-warning" title="Interventi/Tickets"></a>
+                <a href="@Url.Action("IndexUsr", "Gettonis", new {uid = item.Id})" class="fa fa-dot-circle-o fa-2x text-danger" title="Gettoni"></a>
             </td>
             <td>
                 @if (File.Exists(@Server.MapPath("/Content/Images/FotoIscritti/" + @Html.DisplayFor(modelItem => item.Id) + ".jpg")))

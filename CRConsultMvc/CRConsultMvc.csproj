@@ -818,6 +818,7 @@
     <Content Include="Views\Home\FormContratto.cshtml" />
     <Content Include="Views\Home\Riservata.cshtml" />
     <Content Include="Views\Interventis\Riservata.cshtml" />
+    <Content Include="Views\Interventis\CreateUsr.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

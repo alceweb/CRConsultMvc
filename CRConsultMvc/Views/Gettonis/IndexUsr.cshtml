@@ -4,18 +4,17 @@
     ViewBag.Title = "Index";
 }
 <div class="container">
-    <h2>Gettoni @Html.DisplayNameFor(model => model.Nome.Nome)
+    <h2 >Gettoni @ViewBag.Utente
 </h2>
 
     <p>
-        @Html.ActionLink("Create New", "Create")
+        <a href="@Url.Action("Create", "Gettonis", new {uid = ViewBag.Uid })" class="btn btn-crc"><span class="badge">@ViewBag.GettoniCount </span> Aggiungi</a>
     </p>
-    <table class="table table-hover">
+    <hr class="hr1" />    <table class="table table-hover">
         <thead>
 
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Id)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Data)
@@ -38,8 +37,9 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Nome.Nome)
-                        @Html.DisplayFor(modelItem => item.Nome.Cognome)
+                        @Html.DisplayFor(modelItem => item.Nome.UserName)
+                         [@Html.DisplayFor(modelItem => item.Nome.Nome)
+                        @Html.DisplayFor(modelItem => item.Nome.Cognome)]
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Data)
@@ -54,9 +54,10 @@
                         @Html.DisplayFor(modelItem => item.Pagato)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Gettone_id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Gettone_id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Gettone_id })
+                        @Html.ActionLink(" ", "Edit", new { id = item.Gettone_id }, new { @class = "fa fa-pencil fa-2x" })
+                        @Html.ActionLink(" ", "Delete", new { id = item.Gettone_id }, new { @class = "fa fa-trash fa-2x text-danger " })
+
+
                     </td>
                 </tr>
             }

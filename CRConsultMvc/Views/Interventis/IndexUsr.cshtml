@@ -4,9 +4,31 @@
 }
 <div class="container">
 
-    @foreach (var item in Model.GroupBy(u => u.Nome.Nome).Select(u => new { utente = u.Key, data = u.OrderByDescending(i => i.DataChiamata) }))
+    @foreach (var item in Model.GroupBy(u => u.Nome.Nome).
+        Select(u => new { utente = u.Key
+        , data = u.OrderByDescending(i => i.DataChiamata)
+        , chiusi = u.Where(i=>i.Chiuso == true).Count()
+        , aperti = u.Where(i=>i.Chiuso == false).Count()
+        , totale = u.Count()
+        }))
     {
-        <h2 class="text-center">Interventi di @item.utente</h2><hr class="hrl" />
+        <div class="row">
+            <div class="col-md-2 col-xs-12">
+                <div class="well well-sm">
+                    <span>Ticket  </span><strong>@item.totale</strong>
+                    <span class="fa fa-unlock text-success">@item.aperti  </span>
+                    <span class="fa fa-lock text-danger">@item.chiusi</span>
+                    <div>Gettoni <strong>@ViewBag.GettoniCount</strong></div>
+                </div>
+
+            </div>
+            <div col-md-2 col-xs-12>
+                <h2 >Interventi di @item.utente</h2>
+
+            </div>
+        </div>
+        <hr class="hrl" />
+
         <table class="table table-hover">
             <thead>
                 <tr>

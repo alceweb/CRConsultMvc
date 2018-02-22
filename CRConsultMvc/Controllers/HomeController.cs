@@ -120,22 +120,31 @@ namespace CRConsultMvc.Controllers
                 var obj = JObject.Parse(result);
                 var status = (bool)obj.SelectToken("success");
                 ViewBag.Message = status ? "Recaptcha validato con successo" : "Devi dimostrare di non essere un robot";
-            if (ModelState.IsValid && status)
+            if (ModelState.IsValid)
             {
 
                 //Invio la mail a crconsult
-                MailMessage message = new MailMessage(
-                    "webservice@cr-consult.it",
-                    esperto.Email,
-                    "Abbiamo ricevuto la tua richiesta",
-                    "Gentile cliente, il giorno " + DateTime.Now.ToString("dddd dd MMM yyyy") + " alle "+ DateTime.Now.ToString("HH.mm")  + " abbiamo registrato la tua richiesta: <hr/>" +
-                    "Data: <strong>" + DateTime.Now + "</strong><br/>" +
-                    "Nome contatto: <strong>" + esperto.Nome + " <em>" + esperto.Ditta + " </em></strong><br/>Telefono: <strong>" + esperto.Telefono + "</strong><br/>Mail: <strong>[" + esperto.Email + "]</strong> <br/>" +
-                    "Motivo della richiesta: <br/><strong>" +
-                    esperto.Richiesta +
-                    "</strong><hr/>Verrai contattato al più presto da un nostro incaricato.<br/>Ti ricordo che questa richiesta di intervento non comporta nessun impegno economico.<br>" +
-                    "Se, dopo l'analisi del nostro esperto, saranno ritenuti necessari degli interventi a pagamento, ti verrà presentato un preventivo di spesa.<br/><br/>Cordiali saluti<br/>WebService C.R.Consult"
-                    );
+                //MailMessage message = new MailMessage(
+                //    "webservice@cr-consult.it",
+                //    esperto.Email,
+                //    "Abbiamo ricevuto la tua richiesta",
+                //    "Gentile cliente, abbiamo registrato la tua richiesta: <hr/>" +
+                //    "Data: <strong>" + DateTime.Now + "</strong><br/>" +
+                //    "Nome contatto: <strong>" + esperto.Nome + " <em>" + esperto.Ditta + " </em></strong><br/>Telefono: <strong>" + esperto.Telefono + "</strong><br/>Mail: <strong>[" + esperto.Email + "]</strong> <br/>" +
+                //    "Motivo della richiesta: <br/><strong>" +
+                //    esperto.Richiesta +
+                //    "</strong><hr/>Verrai contattato al più presto da un nostro incaricato.<br/><br/>Cordiali saluti<br/>WebService C.R.Consult"
+                //    );
+                var body = "La tua richiesta è stata registrata.<hr><ul><li>"
+                    + esperto.Nome + "</li><li>"
+                    + esperto.Telefono + "</li><li>"
+                    + esperto.Email + "</li></ul><br/><strong><em>"
+                    + esperto.Richiesta + "</strong></em>";
+                var message = new MailMessage();
+                message.To.Add(new MailAddress(esperto.Email));
+                message.From = new MailAddress("webservice@cr-consult.it");
+                message.Subject = "Contatta l'esperto";
+                message.Body = string.Format(body, esperto.Nome, esperto.Email, esperto.Telefono , esperto.Richiesta);
                 message.IsBodyHtml = true;
                 MailAddress bcc = new MailAddress("cesare@cr-consult.eu");
                 message.Bcc.Add(bcc);
